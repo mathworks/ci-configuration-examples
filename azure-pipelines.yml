@@ -1,0 +1,23 @@
+pool:
+  vmImage: Ubuntu 16.04
+steps:
+  - task: InstallMATLAB@0
+  - task: RunMATLABTests@0
+    inputs:
+      sourceFolder: code
+      codeCoverageCobertura: code-coverage/coverage.xml
+      testResultsJUnit: test-results/results.xml
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'test-results/results.xml'
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: 'Cobertura'
+      summaryFileLocation: 'code-coverage/coverage.xml'
+      pathToSources: 'code/'
+
+  # As an alternative to RunMATLABTests, you can use RunMATLABCommand to execute a MATLAB script, function, or statement.
+  # - task: RunMATLABCommand@0
+  #   inputs:
+  #     command: addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);

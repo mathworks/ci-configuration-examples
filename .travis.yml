@@ -1,0 +1,2 @@
+language: matlab
+script: matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
