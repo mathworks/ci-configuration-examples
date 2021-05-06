@@ -55,7 +55,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 | **GitHub&reg;&nbsp;Actions** ||
 |:-|:-|
 | Badges <br> (static&nbsp;examples) | ![MATLAB](https://img.shields.io/badge/MATLAB%20Tests-passing-brightgreen?logo=github) |
-| Badge Code | \[\!\[MATLAB](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/workflows/***GITHUB_WORKFLOW_NAME***/badge.svg)](https://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/actions?query=workflow%3A***GITHUB_WORKFLOW_NAME***) |
+| Badge Code | \[\!\[MATLAB](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/workflows/***GITHUB_WORKFLOW_NAME***/badge.svg)](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/actions?query=workflow%3A***GITHUB_WORKFLOW_NAME***) |
 | Badge Help | [GitHub Actions documentation for setting up badges](https://docs.github.com/en/actions/managing-workflow-runs/adding-a-workflow-status-badge) |
 
 <br>
@@ -63,7 +63,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 | **Travis&nbsp;CI&trade;** ||
 |:-|:-|
 | Badges <br> (static&nbsp;examples) | ![Travis CI Build Status](https://img.shields.io/badge/build-passing-brightgreen) |
-| Badge Code | \[\!\[Travis CI Build Status](https[]()://travis-ci.com/***CI_USERNAME***/***CI_JOB_NAME***.svg?branch=main)](https://travis-ci.com/***CI_USERNAME***/***CI_JOB_NAME***) |
+| Badge Code | \[\!\[Travis CI Build Status](https[]()://travis-ci.com/***CI_USERNAME***/***CI_JOB_NAME***.svg?branch=main)](https[]()://travis-ci.com/***CI_USERNAME***/***CI_JOB_NAME***) |
 | Badge Help | [Travis CI documentation for setting up badges](https://docs.travis-ci.com/user/status-images/ "Travis CI documentation for setting up badges") |
 
 <br>
