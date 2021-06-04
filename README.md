@@ -16,54 +16,56 @@ Take a look at the "Quick Start Guide" below to get started!
 ## Quick start guide
 Here's how to quickly get this repository running on a CI system:
 1. Fork the repository to your own GitHub account
-2. Go to one of the supported CI platforms and install the available MATLAB CI plugin.  
-***Note:*** GitHub Actions does not require this step.
-3. Create a new CI job using your forked repository.  
+2. Go to one of the supported CI platforms and install the available MATLAB CI plugin
+***Note:*** GitHub Actions does not require this step
+3. Create a new CI job using your forked repository
 4. Enjoy using CI with MATLAB!
 
 That's really it!
 
 To use your MATLAB code or Simulink&reg; models with this repository, simply replace the existing code and tests in "code" and "tests" with your own code and tests. There's no need to modify any of the CI configuration files because they are all completely agnostic of the MATLAB code being used.
 
-***Note:*** In most cases, the configuration files will automatically get picked up by the CI platform during step 3, but some platforms may require you to specify which file to use.
+***Notes:***
+* In most cases, the configuration files will automatically get picked up by the CI platform during step 3, but some platforms may require you to specify which file to use
+* The default branch for this repository is "main"
 
 <br>
 
 
 ## Badges
 
-Badges look really great, but they're not always easy to set up. Take a look at the badges and reference links below to get started with badges for your repository.
+Badges look really great, but they're not always easy to set up. Take a look at the badges, badge code, and reference links below to get started with badges for your repository.
 
 <br>
 
 | **Azure&reg;&nbsp;DevOps** ||
 |:-|:-|
-| Badges <br> (static&nbsp;examples) | ![Azure DevOps Build Status](https://img.shields.io/badge/Azure%20Pipelines-succeeded-brightgreen?logo=azurepipelines) <br> ![Azure DevOps Coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen) |
-| Badge Code | \[\!\[Azure DevOps Build Status](https[]()://dev.azure.com/***CI_USERNAME***/***CI_JOB_NAME_HTML***/_apis/build/status/***GITHUB_USERNAME***.***GITHUB_REPO_NAME***?branchName=main)](https[]()://dev.azure.com/***CI_USERNAME***/***CI_JOB_NAME***/_build/latest?definitionId=1&branchName=main) <br><br> \!\[Azure DevOps Coverage](https[]()://img.shields.io/azure-devops/coverage/***CI_USERNAME***/***CI_JOB_NAME_HTML***/1/main) |
+| Badges | [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/36) |
+| Badge Code | \[\!\[Build Status](https[]()://dev.azure.com/***AZURE_DEVOPS_ORG***/***AZURE_DEVOPS_PROJECT_NAME***/_apis/build/status/***GITHUB_USERNAME***.***GITHUB_REPO_NAME***)](https[]()://dev.azure.com/***AZURE_DEVOPS_ORG***/***AZURE_DEVOPS_PROJECT_NAME***/_build) <br><br> \!\[Azure DevOps Coverage](https[]()://img.shields.io/azure-devops/coverage/***AZURE_DEVOPS_ORG***/***AZURE_DEVOPS_PROJECT_NAME***/***AZURE_DEVOPS_DEFINITION_ID***) |
 | Badge Help | [Blog with helpful information for setting up Azure DevOps badges](https://gregorsuttie.com/2019/03/20/azure-devops-add-your-build-status-badges-to-your-wiki/) |
 
 <br>
 
 | **CircleCI&reg;** ||
 |:-|:-|
-| Badges <br> (static&nbsp;examples) | ![CircleCI Build Badge](https://img.shields.io/badge/circleci-passing-brightgreen?logo=circleci) |
-| Badge Code | \[\!\[CircleCI Build Badge](https[]()://circleci.com/gh/***CI_USERNAME***/***CI_JOB_NAME***.svg?style=shield)](https[]()://circleci.com/gh/***CI_USERNAME***/***CI_JOB_NAME***) |
-| Badge Help | [CircleCI documentation for setting up badges](https://circleci.com/docs/2.0/status-badges/#generating-a-status-badge "CircleCI documentation for setting up badges") |
+| Badge | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples) |
+| Badge Code | \[\!\[CircleCI](https[]()://circleci.com/***SOURCE_CONTROL_SYSTEM***/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***.svg?style=svg)](https[]()://circleci.com/***SOURCE_CONTROL_SYSTEM***/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***) |
+| Badge Help | [CircleCI documentation for setting up badges](https://circleci.com/docs/2.0/status-badges "CircleCI documentation for setting up badges") |
 
 <br>
 
 | **GitHub&reg;&nbsp;Actions** ||
 |:-|:-|
-| Badges <br> (static&nbsp;examples) | ![MATLAB](https://img.shields.io/badge/MATLAB%20Tests-passing-brightgreen?logo=github) |
-| Badge Code | \[\!\[MATLAB](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/workflows/***GITHUB_WORKFLOW_NAME***/badge.svg)](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/actions?query=workflow%3A***GITHUB_WORKFLOW_NAME***) |
+| Badge | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) |
+| Badge Code | \[\!\[MATLAB](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/actions/workflows/ci.yml/badge.svg)](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/actions/workflows/ci.yml) |
 | Badge Help | [GitHub Actions documentation for setting up badges](https://docs.github.com/en/actions/managing-workflow-runs/adding-a-workflow-status-badge) |
 
 <br>
 
 | **Travis&nbsp;CI&trade;** ||
 |:-|:-|
-| Badges <br> (static&nbsp;examples) | ![Travis CI Build Status](https://img.shields.io/badge/build-passing-brightgreen) |
-| Badge Code | \[\!\[Travis CI Build Status](https[]()://travis-ci.com/***CI_USERNAME***/***CI_JOB_NAME***.svg?branch=main)](https[]()://travis-ci.com/***CI_USERNAME***/***CI_JOB_NAME***) |
+| Badge | [![Build Status](https://travis-ci.com/mathworks/ci-configuration-examples.svg)](https://travis-ci.com/mathworks/ci-configuration-examples) |
+| Badge Code | \[\!\[Build Status](https[]()://travis-ci.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***.svg)](https[]()://travis-ci.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***) |
 | Badge Help | [Travis CI documentation for setting up badges](https://docs.travis-ci.com/user/status-images/ "Travis CI documentation for setting up badges") |
 
 <br>
@@ -72,17 +74,18 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 1. Copy-paste the badge code into your README.md file
     * The badge code you copy should start with "`[!`" and not "`\[\!`"
 2. Replace all ***BOLD+ITALIC*** names with your specific credentials/names
-    * Replace ***CI_USERNAME*** with your username on the respective CI platform
-    * Replace ***CI_JOB_NAME*** with the name of the CI job on the respective CI platform (this may contain HTML encodings for characters like spaces)
-    * Replace ***GITHUB_WORKFLOW_NAME*** with the name of the workflow on GitHub Actions
-      * Make sure to double-check this name with what is listed on the Actions page of your GitHub repository because GitHub automatically replaces some characters in the workflow name, such as replacing spaces with dashes
-    * Replace ***GITHUB_USERNAME*** with your GitHub username
-    * Replace ***GITHUB_REPO_NAME*** with the name of your GitHub repository that the CI job is using
+    * Replace ***GITHUB_ORG*** with your GitHub organization name (usually your GitHub username)
+    * Replace ***GITHUB_REPO_NAME*** with the name of your GitHub repository
+    * Replace ***SOURCE_CONTROL_SYSTEM*** with the name of the source control system you are pointing to (gh = GitHub, bb = BitBucket)
+    * Replace ***AZURE_DEVOPS_ORG*** with the name of your Azure DevOps organization name (usually your Azure DevOps username)
+    * Replace ***AZURE_DEVOPS_PROJECT_NAME*** with the name of the Azure DevOps project that will run the CI job
+    * Replace ***AZURE_DEVOPS_DEFINITION_ID*** with the definition ID for your Azure DevOps pipeline
+      * To find the definition ID for your Azure DevOps pipeline, you must:
+        * go to your Azure DevOps project
+        * select "Pipelines" from the left-side navigation menu
+        * select the pipeline you want to get coverage for
+        * look at the end of the resulting URL for the number in "definitionId=###"
 
-<br>
-
-**Static Badge Notes**
-* The example static badges may look slightly different than the badges directly provided by the various CI platforms
 
 <br>
 <br>
@@ -194,7 +197,7 @@ jobs:
 ```yml
 # This is a basic workflow to help you get started with MATLAB Actions
 
-name: MATLAB
+name: MATLAB Build
 
 # Controls when the action will run. 
 on:
