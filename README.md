@@ -1,9 +1,9 @@
-| **Azure&reg;&nbsp;DevOps** | **CircleCI&reg;** | **GitHub&reg;&nbsp;Actions** | **Travis&nbsp;CI&trade;** |
+| **Azure<sup>&reg;</sup>&nbsp;DevOps** | **CircleCI<sup>&reg;</sup>** | **GitHub<sup>&reg;</sup>&nbsp;Actions** | **Travis&nbsp;CI&trade;** |
 |:---------------------------|:-----------------:|:----------------------------:|--------------------------:|
 | [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/36) | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples) <br><br> | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) <br><br> | [![Build Status](https://travis-ci.com/mathworks/ci-configuration-examples.svg)](https://travis-ci.com/mathworks/ci-configuration-examples) <br><br> |
 
 
-# Continuous Integration (CI) configuration examples for MATLAB&reg;
+# Continuous Integration (CI) configuration examples for MATLAB<sup>&reg;</sup>
 
 Are you interested in automating your testing with CI?
 
@@ -43,7 +43,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 
 <br>
 
-| **Azure&reg;&nbsp;DevOps** |  |
+| **Azure&nbsp;DevOps** |  |
 |:---------------------------|:-|
 | Badges | [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/36) |
 | Badge Code | \[\!\[Build Status](https[]()://dev.azure.com/***AZURE_DEVOPS_ORG***/***AZURE_DEVOPS_PROJECT_NAME***/_apis/build/status/***GITHUB_USERNAME***.***GITHUB_REPO_NAME***)](https[]()://dev.azure.com/***AZURE_DEVOPS_ORG***/***AZURE_DEVOPS_PROJECT_NAME***/_build) <br><br> \!\[Azure DevOps Coverage](https[]()://img.shields.io/azure-devops/coverage/***AZURE_DEVOPS_ORG***/***AZURE_DEVOPS_PROJECT_NAME***/***AZURE_DEVOPS_DEFINITION_ID***) |
@@ -51,7 +51,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 
 <br>
 
-| **CircleCI&reg;** |  |
+| **CircleCI** |  |
 |:------------------|:-|
 | Badge | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples) |
 | Badge Code | \[\!\[CircleCI](https[]()://circleci.com/***SOURCE_CONTROL_SYSTEM***/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***.svg?style=svg)](https[]()://circleci.com/***SOURCE_CONTROL_SYSTEM***/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***) |
@@ -59,7 +59,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 
 <br>
 
-| **GitHub&reg;&nbsp;Actions** |  |
+| **GitHub&nbsp;Actions** |  |
 |:-----------------------------|:-|
 | Badge | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) |
 | Badge Code | \[\!\[MATLAB](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/actions/workflows/ci.yml/badge.svg)](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/actions/workflows/ci.yml) |
@@ -67,7 +67,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 
 <br>
 
-| **Travis&nbsp;CI&trade;** |  |
+| **Travis&nbsp;CI** |  |
 |:--------------------------|:-|
 | Badge | [![Build Status](https://travis-ci.com/mathworks/ci-configuration-examples.svg)](https://travis-ci.com/mathworks/ci-configuration-examples) |
 | Badge Code | \[\!\[Build Status](https[]()://travis-ci.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***.svg)](https[]()://travis-ci.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***) |
