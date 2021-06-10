@@ -1,3 +1,11 @@
+| **Azure&reg;&nbsp;DevOps** | **CircleCI&reg;** | **GitHub&reg;&nbsp;Actions** | **Travis&nbsp;CI&trade;** |
+|:---------------------------|:-----------------:|:----------------------------:|--------------------------:|
+| [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/36) | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples) <br><br> | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) <br><br> | [![Build Status](https://travis-ci.com/mathworks/ci-configuration-examples.svg)](https://travis-ci.com/mathworks/ci-configuration-examples) <br><br>|
+
+
+ <br> <br>
+
+
 # Continuous Integration (CI) configuration examples for MATLAB&reg;
 
 Are you interested in automating your testing with CI?
@@ -38,32 +46,32 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 
 <br>
 
-| **Azure&reg;&nbsp;DevOps** ||
-|:-|:-|
+| **Azure&reg;&nbsp;DevOps** |  |
+|:---------------------------|:-|
 | Badges | [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/36) |
 | Badge Code | \[\!\[Build Status](https[]()://dev.azure.com/***AZURE_DEVOPS_ORG***/***AZURE_DEVOPS_PROJECT_NAME***/_apis/build/status/***GITHUB_USERNAME***.***GITHUB_REPO_NAME***)](https[]()://dev.azure.com/***AZURE_DEVOPS_ORG***/***AZURE_DEVOPS_PROJECT_NAME***/_build) <br><br> \!\[Azure DevOps Coverage](https[]()://img.shields.io/azure-devops/coverage/***AZURE_DEVOPS_ORG***/***AZURE_DEVOPS_PROJECT_NAME***/***AZURE_DEVOPS_DEFINITION_ID***) |
 | Badge Help | [Blog with helpful information for setting up Azure DevOps badges](https://gregorsuttie.com/2019/03/20/azure-devops-add-your-build-status-badges-to-your-wiki/) |
 
 <br>
 
-| **CircleCI&reg;** ||
-|:-|:-|
+| **CircleCI&reg;** |  |
+|:------------------|:-|
 | Badge | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples) |
 | Badge Code | \[\!\[CircleCI](https[]()://circleci.com/***SOURCE_CONTROL_SYSTEM***/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***.svg?style=svg)](https[]()://circleci.com/***SOURCE_CONTROL_SYSTEM***/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***) |
 | Badge Help | [CircleCI documentation for setting up badges](https://circleci.com/docs/2.0/status-badges "CircleCI documentation for setting up badges") |
 
 <br>
 
-| **GitHub&reg;&nbsp;Actions** ||
-|:-|:-|
+| **GitHub&reg;&nbsp;Actions** |  |
+|:-----------------------------|:-|
 | Badge | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) |
 | Badge Code | \[\!\[MATLAB](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/actions/workflows/ci.yml/badge.svg)](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/actions/workflows/ci.yml) |
 | Badge Help | [GitHub Actions documentation for setting up badges](https://docs.github.com/en/actions/managing-workflow-runs/adding-a-workflow-status-badge) |
 
 <br>
 
-| **Travis&nbsp;CI&trade;** ||
-|:-|:-|
+| **Travis&nbsp;CI&trade;** |  |
+|:--------------------------|:-|
 | Badge | [![Build Status](https://travis-ci.com/mathworks/ci-configuration-examples.svg)](https://travis-ci.com/mathworks/ci-configuration-examples) |
 | Badge Code | \[\!\[Build Status](https[]()://travis-ci.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***.svg)](https[]()://travis-ci.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***) |
 | Badge Help | [Travis CI documentation for setting up badges](https://docs.travis-ci.com/user/status-images/ "Travis CI documentation for setting up badges") |
@@ -126,7 +134,7 @@ There are 2 test classes provided:
 The repository includes these files:
 
 | **File Path**              | **Description** |
-|----------------------------|-----------------|
+|:---------------------------|:----------------|
 | [`code/dayofyear.m`](code/dayofyear.m) | The [`dayofyear`](code/dayofyear.m) function returns the day-of-year number for a given date string "mm/dd/yyyy" |
 | [`tests/TestExamples.m`](tests/TestExamples.m) | The [`TestExamples`](tests/TestExamples.m) class provides a few equality and negative tests for the [`dayofyear`](code/dayofyear.m) function |
 | [`tests/ParameterizedTestExample.m`](tests/ParameterizedTestExample.m) | The [`ParameterizedTestExample`](tests/ParameterizedTestExample.m) class provides 12 tests for the [`dayofyear`](code/dayofyear.m) function using the parameterized test format |
