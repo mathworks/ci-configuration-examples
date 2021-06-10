@@ -28,7 +28,7 @@ Here's how to quickly get this repository running on a CI system:
 
 That's really it!
 
-To use your MATLAB code or Simulink&reg; models with this repository, simply replace the existing code and tests in "code" and "tests" with your own code and tests. There's no need to modify any of the CI configuration files because they are all completely agnostic of the MATLAB code being used.
+To use your MATLAB code or Simulink<sup>&reg;</sup> models with this repository, simply replace the existing code and tests in "code" and "tests" with your own code and tests. There's no need to modify any of the CI configuration files because they are all completely agnostic of the MATLAB code being used.
 
 ***Notes:***
 * In most cases, the configuration files will automatically get picked up by the CI platform during step 3, but some platforms may require you to specify which file to use
@@ -111,7 +111,7 @@ The primary goal of this repository is to provide a set of configuration files a
 
 Each of these pipeline definitions does four things:
 
-1. Install the latest MATLAB release on a Linux&reg;-based build agent
+1. Install the latest MATLAB release on a Linux<sup>&reg;</sup>-based build agent
 2. Run all MATLAB tests in the root of your repository, including its subfolders
 3. Produce a test results report (if necessary)
 4. Produce a code coverage report in Cobertura XML format for the source folder
