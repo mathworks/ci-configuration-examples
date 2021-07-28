@@ -7,11 +7,6 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-  repository_dispatch:
-    types: [batch-trigger]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
 jobs:
   # This workflow contains a single job called "build"
