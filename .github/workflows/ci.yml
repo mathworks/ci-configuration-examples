@@ -34,3 +34,17 @@ jobs:
       #  uses: matlab-actions/run-command@v0
       #  with:
       #    command: addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
+
+      - name: Send mail
+        if: ${{ failure() }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+          to: ${{ secrets.CI_INTERNAL_EMAIL }}
+          from: ${{ secrets.MAIL_USERNAME }}
+          secure: true
+          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
