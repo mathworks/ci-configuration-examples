@@ -150,6 +150,7 @@ The repository includes these files:
 | [`.github/workflows/ci.yml`](###GitHub-Actions) | The [`ci.yml`](.github/workflows/ci.yml) file defines the pipeline that runs on [GitHub Actions](https://github.com/matlab-actions/overview) |
 | [`Jenkinsfile`](###Jenkins) | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs on [Jenkins](https://plugins.jenkins.io/matlab/) |
 | [`.travis.yml`](###Travis-CI) | The [`.travis.yml`](.travis.yml) file defines the pipeline that runs on [Travis CI](https://docs.travis-ci.com/user/languages/matlab/) |
+| [`.gitlab.yml`](###GitLab-CI/CD) | The [`.gitlab.yml`](.gitlab.yml) file defines the pipeline that runs on [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) |
 
 <br>
 
@@ -280,6 +281,20 @@ pipeline {
 ```yml
 language: matlab
 script: matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
+```
+<br>
+
+### GitLab CI/CD
+```yml
+stages:         
+  - matlab-test
+
+matlab-test:       
+  stage: matlab-test
+  script:
+    - matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
+  tags:
+    - matlab #Optional, use tags to select a specific runner from the list of all runners that are available for the project.
 ```
 <br>
 
