@@ -75,6 +75,14 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 
 <br>
 
+| **GitLab&nbsp;CI/CD** |  |
+|:--------------------------|:-|
+| Badge | [![Pipeline Status](https://gitlab.cn/Zalyoung/matlab-ci-example/badges/main/pipeline.svg)](https://gitlab.cn/Zalyoung/matlab-ci-example) |
+| Badge Code | \[\!\[Pipeline Status](https[]()://gitlab.cn/***GITLAB_PROJECT_PATH***/badges/***DEFAULT_BRANCH_NAME***/pipeline.svg)](https[]()://gitlab.cn/***GITLAB_PROJECT_PATH***) |
+| Badge Help | [GitLab CI/CD documentation for setting up badges](https://docs.gitlab.com/ee/user/project/badges.html "GitLab CI/CD documentation for setting up badges") |
+
+<br>
+
 **How to use the Badge Code:**
 1. Copy-paste the badge code into your README.md file
     * The badge code you copy should start with "`[!`" and not "`\[\!`"
@@ -90,7 +98,8 @@ Badges look really great, but they're not always easy to set up. Take a look at 
         * select "Pipelines" from the left-side navigation menu
         * select the pipeline you want to get coverage for
         * look at the end of the resulting URL for the number in "definitionId=###"
-
+    * Replace ***GITLAB_PROJECT_PATH*** with the path of your GitLab Project
+    * Replace ***DEFAULT_BRANCH_NAME*** with the repository branch name you want to get the pipeline status from.
 
 <br>
 <br>
@@ -102,6 +111,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 * GitHub Actions
 * Jenkins&trade;
 * Travis CI
+* GitLab CI/CD
 
 <br>
 
