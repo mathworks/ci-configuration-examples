@@ -77,8 +77,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 
 | **GitLab&nbsp;CI/CD** |  |
 |:--------------------------|:-|
-| Badge | [![Pipeline Status](https://gitlab.cn/Zalyoung/matlab-ci-example/badges/main/pipeline.svg)](https://gitlab.cn/Zalyoung/matlab-ci-example) |
-| Badge Code | \[\!\[Pipeline Status](https[]()://gitlab.cn/***GITLAB_PROJECT_PATH***/badges/***DEFAULT_BRANCH_NAME***/pipeline.svg)](https[]()://gitlab.cn/***GITLAB_PROJECT_PATH***) |
+| Badge Code | \[\!\[Pipeline Status](https[]()://gitlab.com/***GITLAB_PROJECT_PATH***/badges/***DEFAULT_BRANCH_NAME***/pipeline.svg)](https[]()://gitlab.com/***GITLAB_PROJECT_PATH***) |
 | Badge Help | [GitLab CI/CD documentation for setting up badges](https://docs.gitlab.com/ee/user/project/badges.html "GitLab CI/CD documentation for setting up badges") |
 
 <br>
