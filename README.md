@@ -292,8 +292,6 @@ matlab-test:
   stage: matlab-test
   script:
     - matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
-  tags:
-    - matlab #Optional, use tags to select a specific runner from the list of all runners that are available for the project.
 ```
 <br>
 
