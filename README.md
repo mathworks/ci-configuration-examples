@@ -97,8 +97,8 @@ Badges look really great, but they're not always easy to set up. Take a look at 
         * select "Pipelines" from the left-side navigation menu
         * select the pipeline you want to get coverage for
         * look at the end of the resulting URL for the number in "definitionId=###"
-    * Replace ***GITLAB_PROJECT_PATH*** with the path of your GitLab Project
-    * Replace ***DEFAULT_BRANCH_NAME*** with the repository branch name you want to get the pipeline status from.
+    * Replace ***GITLAB_PROJECT_PATH*** with the path of your GitLab project
+    * Replace ***DEFAULT_BRANCH_NAME*** with the repository branch name you want to get the pipeline status from
 
 <br>
 <br>
