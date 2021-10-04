@@ -1,0 +1,7 @@
+stages:         
+  - test
+
+matlab-test-job:       
+  stage: test
+  script:
+    - matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
