@@ -1,5 +1,5 @@
-| **Azure<sup>&reg;</sup>&nbsp;DevOps** | **CircleCI<sup>&reg;</sup>** | **GitHub<sup>&reg;</sup>&nbsp;Actions** | **Travis&nbsp;CI&trade;** |
-|:---------------------------|:-----------------:|:----------------------------:|--------------------------:|
+| **Azure<sup>&reg;</sup>&nbsp;DevOps** | **CircleCI<sup>&reg;</sup>** | **GitHub<sup>&reg;</sup>&nbsp;Actions** | **Travis&nbsp;CI&trade;** | 
+|:---------------------------|:-----------------:|:----------------------------:|:--------------------------:|
 | [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/36) | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples) <br><br> | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) <br><br> | [![Build Status](https://app.travis-ci.com/mathworks/ci-configuration-examples.svg)](https://app.travis-ci.com/mathworks/ci-configuration-examples) <br><br> |
 
 
@@ -75,6 +75,13 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 
 <br>
 
+| **GitLab&nbsp;CI/CD** |  |
+|:--------------------------|:-|
+| Badge Code | \[\!\[Pipeline Status](https[]()://gitlab.com/***GITLAB_PROJECT_PATH***/badges/***DEFAULT_BRANCH_NAME***/pipeline.svg)](https[]()://gitlab.com/***GITLAB_PROJECT_PATH***) |
+| Badge Help | [GitLab CI/CD documentation for setting up badges](https://docs.gitlab.com/ee/user/project/badges.html "GitLab CI/CD documentation for setting up badges") |
+
+<br>
+
 **How to use the Badge Code:**
 1. Copy-paste the badge code into your README.md file
     * The badge code you copy should start with "`[!`" and not "`\[\!`"
@@ -90,7 +97,8 @@ Badges look really great, but they're not always easy to set up. Take a look at 
         * select "Pipelines" from the left-side navigation menu
         * select the pipeline you want to get coverage for
         * look at the end of the resulting URL for the number in "definitionId=###"
-
+    * Replace ***GITLAB_PROJECT_PATH*** with the path of your GitLab project
+    * Replace ***DEFAULT_BRANCH_NAME*** with the repository branch name you want to get the pipeline status from
 
 <br>
 <br>
@@ -102,6 +110,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 * GitHub Actions
 * Jenkins&trade;
 * Travis CI
+* GitLab CI/CD
 
 <br>
 
@@ -140,6 +149,7 @@ The repository includes these files:
 | [`.github/workflows/ci.yml`](###GitHub-Actions) | The [`ci.yml`](.github/workflows/ci.yml) file defines the pipeline that runs on [GitHub Actions](https://github.com/matlab-actions/overview) |
 | [`Jenkinsfile`](###Jenkins) | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs on [Jenkins](https://plugins.jenkins.io/matlab/) |
 | [`.travis.yml`](###Travis-CI) | The [`.travis.yml`](.travis.yml) file defines the pipeline that runs on [Travis CI](https://docs.travis-ci.com/user/languages/matlab/) |
+| [`.gitlab-ci.yml`](###GitLab-CI/CD) | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs on [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) |
 
 <br>
 
@@ -270,6 +280,18 @@ pipeline {
 ```yml
 language: matlab
 script: matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
+```
+<br>
+
+### GitLab CI/CD
+```yml
+stages:         
+  - matlab-test
+
+matlab-test:       
+  stage: matlab-test
+  script:
+    - matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
 ```
 <br>
 
