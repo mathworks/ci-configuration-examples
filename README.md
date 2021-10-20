@@ -159,7 +159,7 @@ The repository includes these files:
 ### Azure DevOps
 ```yml
 pool:
-  vmImage: Ubuntu 16.04
+  vmImage: ubuntu-latest
 steps:
   - task: InstallMATLAB@0
   - task: RunMATLABTests@0
@@ -194,7 +194,7 @@ orbs:
 jobs:
   build:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:202107-02
     steps:
       - checkout
       - matlab/install
