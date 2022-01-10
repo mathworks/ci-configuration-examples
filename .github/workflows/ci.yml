@@ -26,11 +26,11 @@ jobs:
       
       # Sets up MATLAB on the GitHub Actions runner
       - name: Setup MATLAB
-        uses: matlab-actions/setup-matlab@v0
+        uses: matlab-actions/setup-matlab@v1
 
       # Runs a set of commands using the runners shell
       - name: Run all tests
-        uses: matlab-actions/run-tests@v0
+        uses: matlab-actions/run-tests@v1
         with:
           source-folder: code
 
