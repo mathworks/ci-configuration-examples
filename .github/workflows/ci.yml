@@ -36,6 +36,6 @@ jobs:
 
       # As an alternative to run-tests, you can use run-command to execute a MATLAB script, function, or statement.
       #- name: Run all tests
-      #  uses: matlab-actions/run-command@v0
+      #  uses: matlab-actions/run-command@v1
       #  with:
       #    command: addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
