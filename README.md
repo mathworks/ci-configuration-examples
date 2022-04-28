@@ -1,5 +1,5 @@
 | Service                             | Status |
-| -------                             | ------ |
+| :------                             | :----- |
 | Azure<sup>&reg;</sup>&nbsp;DevOps   | [![Azure DevOps](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) |
 | CircleCI<sup>&reg;</sup>            | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples) |
 | GitHub<sup>&reg;</sup>&nbsp;Actions | [![GitHub Actions](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) |
