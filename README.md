@@ -190,11 +190,10 @@ steps:
 version: 2.1
 orbs:
   matlab: mathworks/matlab@0
-  codecov: codecov/codecov@1
 jobs:
   build:
     machine:
-      image: ubuntu-2004:202107-02
+      image: ubuntu-2004:202201-02
     steps:
       - checkout
       - matlab/install
@@ -234,7 +233,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       # Sets up MATLAB on the GitHub Actions runner
       - name: Setup MATLAB
