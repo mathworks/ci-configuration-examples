@@ -278,6 +278,7 @@ pipeline {
 ### Travis CI
 ```yml
 language: matlab
+dist: jammy
 script: matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
 ```
 <br>
