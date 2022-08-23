@@ -159,7 +159,7 @@ The repository includes these files:
 ### Azure DevOps
 ```yml
 pool:
-  vmImage: ubuntu-latest
+  vmImage: ubuntu-22.04
 steps:
   - task: InstallMATLAB@0
   - task: RunMATLABTests@0
@@ -193,7 +193,7 @@ orbs:
 jobs:
   build:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2022.07.1
     steps:
       - checkout
       - matlab/install
@@ -228,7 +228,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
