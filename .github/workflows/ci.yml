@@ -38,4 +38,4 @@ jobs:
       - name: Run a command
         uses: matlab-actions/run-command@v1
         with:
-          command: appFile = fullfile(matlabroot,'extern','examples','compiler','magicsquare.m'); buildResults = compiler.build.standaloneApplication(appFile);
+          command: license checkout Simulink; license checkout Statistics_Toolbox
