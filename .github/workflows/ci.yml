@@ -38,4 +38,14 @@ jobs:
       - name: Run a command
         uses: matlab-actions/run-command@v1
         with:
-          command: license checkout Simulink; license checkout Statistics_Toolbox
+          command: license checkout Simulink
+      
+      - name: Run a command
+        uses: matlab-actions/run-command@v1
+        with:
+          command: license checkout Statistics_Toolbox
+      
+      - name: Run a command
+        uses: matlab-actions/run-command@v1
+        with:
+          command: license checkout MATLAB_Coder
