@@ -5,7 +5,7 @@ pipeline {
     stage('Run MATLAB Tests') {
       steps {
         runMATLABTests(
-          sourceFolder: code
+          sourceFolder : code
         )
       }
     }
