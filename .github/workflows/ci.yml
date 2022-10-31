@@ -7,8 +7,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -28,23 +26,7 @@ jobs:
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v1
 
-      # Runs a set of commands using the runners shell
-      #- name: Run all tests
-      #  uses: matlab-actions/run-tests@v1
-      #  with:
-      #    source-folder: code
-
-      # As an alternative to run-tests, you can use run-command to execute a MATLAB script, function, or statement.
-      - name: Run a command
-        uses: matlab-actions/run-command@v1
-        with:
-          command: license checkout Simulink
-      
-      - name: Run a command
-        uses: matlab-actions/run-command@v1
-        with:
-          command: license checkout Statistics_Toolbox
-      
+      # As an alternative to run-tests, you can use run-command to execute a MATLAB script, function, or statement
       - name: Run a command
         uses: matlab-actions/run-command@v1
         with:
