@@ -65,21 +65,21 @@ classdef TestExamples < matlab.unittest.TestCase
             testCase.verifyError(@() dayofyear(dateStr),"MATLAB:datetime:ParseErr");
         end
 
-%         function testAlternateDateFormat(testCase)
-%             % Create date of April 1st, 2021 in alternate date format
-%             dateStr = "01/04/2021";
-%             dateFormat = "dd/mm/yyyy";
-% 
-%             % Calculate expected result
-%             dt = datetime(dateStr,"Format","dd/MM/uuuu");
-%             doyExpected = day(dt,"dayofyear");
-% 
-%             % Get actual result
-%             doyActual = dayofyear(dateStr,dateFormat);
-% 
-%             % Verify that the two are equal
-%             testCase.verifyEqual(doyActual,doyExpected)
-%         end
+        function testAlternateDateFormat(testCase)
+            % Create date of April 1st, 2021 in alternate date format
+            dateStr = "01/04/2021";
+            dateFormat = "dd/mm/yyyy";
+
+            % Calculate expected result
+            dt = datetime(dateStr,"Format","dd/MM/uuuu");
+            doyExpected = day(dt,"dayofyear");
+
+            % Get actual result
+            doyActual = dayofyear(dateStr,dateFormat);
+
+            % Verify that the two are equal
+            testCase.verifyEqual(doyActual,doyExpected)
+        end
         
     end
 
