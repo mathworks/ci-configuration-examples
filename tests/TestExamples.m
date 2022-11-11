@@ -83,6 +83,7 @@ classdef TestExamples < matlab.unittest.TestCase
 
          function testFail(testCase)
             % Verify that the two are equal
+            % or not
             testCase.verifyEqual(1,1)
         end
         
