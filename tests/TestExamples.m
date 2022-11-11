@@ -80,6 +80,12 @@ classdef TestExamples < matlab.unittest.TestCase
             % Verify that the two are equal
             testCase.verifyEqual(doyActual,doyExpected)
         end
+
+         function testFail(testCase)
+            % Verify that the two are equal
+            % or not
+            testCase.verifyEqual(1,2)
+        end
         
     end
 
