@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with MATLAB Actions
 
-name: MATLAB Build
+name: MATLAB Bob the Builder
 
 # Controls when the action will run. 
 on:
