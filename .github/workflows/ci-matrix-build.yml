@@ -6,13 +6,10 @@ name: MATLAB matrix build
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [main, setup-matlab-matrix-build]
   pull_request:
-    branches: [main]
   # Schedule the workflow to run hourly
   schedule:
     - cron: "0 * * * *"
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -62,8 +59,17 @@ jobs:
           test-results-junit: test-results/results.xml
           code-coverage-cobertura: code-coverage/coverage.xml
 
-      # As an alternative to run-tests, you can use run-command to execute a MATLAB script, function, or statement.
-      #- name: Run all tests
-      #  uses: matlab-actions/run-command@v1
-      #  with:
-      #    command: addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
+      # Send notification on fails
+      - name: Send mail
+        if: ${{ failure() }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+          to: ${{ secrets.CI_INTERNAL_EMAIL }}
+          from: ${{ secrets.MAIL_USERNAME }}
+          secure: true
+          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
