@@ -7,9 +7,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
   pull_request:
-  # Schedule the workflow to run hourly
-  schedule:
-    - cron: "0 * * * *"
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -37,6 +34,21 @@ jobs:
           test-results-junit: test-results/results.xml
           code-coverage-cobertura: code-coverage/coverage.xml
 
+      # Send notification on fails
+      - name: Send mail
+        if: ${{ failure() }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+          to: ${{ secrets.CI_INTERNAL_EMAIL }}
+          from: ${{ secrets.MAIL_USERNAME }}
+          secure: true
+          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+
   build-v2-beta:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -56,6 +68,7 @@ jobs:
         uses: matlab-actions/run-tests@v1
         with:
           source-folder: code
+          select-by-folder: test
           test-results-junit: test-results/results.xml
           code-coverage-cobertura: code-coverage/coverage.xml
 
