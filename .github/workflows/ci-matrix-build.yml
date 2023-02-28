@@ -34,6 +34,20 @@ jobs:
           test-results-junit: test-results/results.xml
           code-coverage-cobertura: code-coverage/coverage.xml
 
+      - name: Send mail
+        if: ${{ failure() }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+          to: ${{ secrets.CI_INTERNAL_EMAIL }}
+          from: ${{ secrets.MAIL_USERNAME }}
+          secure: true
+          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+
   build-v2-beta:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -52,37 +66,21 @@ jobs:
       - name: Run tests and generate artifacts
         uses: matlab-actions/run-tests@v1
         with:
-          source-folder: codes
+          source-folder: code
           select-by-folder: test
           test-results-junit: test-results/results.xml
           code-coverage-cobertura: code-coverage/coverage.xml
 
-  send-notification-on-failure:
-    # Send notification only when build-v1 or build-v2-beta failed
-    if: ${{ jobs.build-v1.result }} == "failure" || ${{ jobs.build-v2-beta.result }} == "failure"
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
-
-      - run: |
-          if [ ${{ jobs.build-v1.result }} == "failure" ]; then
-          echo "failed_job=build-v1" >> $GITHUB_ENV
-          elif [ ${{ jobs.build-v2-beta.result }} == "failure" ]; then
-          echo "failed_job=build-v2-beta" >> $GITHUB_ENV
-
-      # Send notification on fails
       - name: Send mail
+        if: ${{ failure() }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          #username: ${{ secrets.MAIL_USERNAME }}
-          #password: ${{ secrets.MAIL_PASSWORD }}
-          subject: ${{ env.failed_job }} job of ${{ github.repository }} has ${{ job.status }}
-          #to: ${{ secrets.CI_INTERNAL_EMAIL }}
-          to: yitingw@mathworks.com
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+          to: ${{ secrets.CI_INTERNAL_EMAIL }}
           from: ${{ secrets.MAIL_USERNAME }}
           secure: true
-          body: ${{ env.failed_job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
