@@ -12,13 +12,12 @@ jobs:
   # This workflow contains a single job called "build-v1"
   build-v1:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Check out repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       # Sets up MATLAB on the GitHub Actions runner
       - name: Setup MATLAB

@@ -1,6 +1,6 @@
-| **Azure<sup>&reg;</sup>&nbsp;DevOps** | **CircleCI<sup>&reg;</sup>** | **GitHub<sup>&reg;</sup>&nbsp;Actions** | **Travis&nbsp;CI&trade;** | 
-|:---------------------------|:-----------------:|:----------------------------:|:--------------------------:|
-| [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/36) | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples) <br><br> | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) <br><br> | [![Build Status](https://app.travis-ci.com/mathworks/ci-configuration-examples.svg)](https://app.travis-ci.com/mathworks/ci-configuration-examples) <br><br> |
+| **Azure<sup>&reg;</sup>&nbsp;DevOps** | **CircleCI<sup>&reg;</sup>** | **GitHub<sup>&reg;</sup>&nbsp;Actions** | **Travis&nbsp;CI&trade;** |
+|:---------------------------|:-----------------:|:----------------------------:|--------------------------:|
+| [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples?branchName=hourly)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build/latest?definitionId=38&branchName=hourly) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/38) | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples/tree/hourly.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples/?branch=hourly) <br><br> | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg?branch=hourly)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) <br><br> | [![Build Status](https://travis-ci.com/mathworks/ci-configuration-examples.svg?branch=hourly)](https://travis-ci.com/mathworks/ci-configuration-examples) <br><br> |
 
 
 # Continuous Integration (CI) configuration examples for MATLAB<sup>&reg;</sup>
@@ -165,7 +165,7 @@ The repository includes these files:
 ### Azure DevOps
 ```yml
 pool:
-  vmImage: ubuntu-latest
+  vmImage: ubuntu-22.04
 steps:
   - task: InstallMATLAB@0
   - task: RunMATLABTests@0
@@ -199,7 +199,7 @@ orbs:
 jobs:
   build:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2022.07.1
     steps:
       - checkout
       - matlab/install
@@ -234,7 +234,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -284,6 +284,7 @@ pipeline {
 ### Travis CI
 ```yml
 language: matlab
+dist: jammy
 script: matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
 ```
 <br>
