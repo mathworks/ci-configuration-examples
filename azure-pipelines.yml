@@ -8,10 +8,12 @@ steps:
       codeCoverageCobertura: code-coverage/coverage.xml
       testResultsJUnit: test-results/results.xml
   - task: PublishTestResults@2
+    condition: always()
     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: 'test-results/results.xml'
   - task: PublishCodeCoverageResults@1
+    condition: always()
     inputs:
       codeCoverageTool: 'Cobertura'
       summaryFileLocation: 'code-coverage/coverage.xml'

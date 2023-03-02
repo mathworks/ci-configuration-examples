@@ -13,16 +13,14 @@ We've got you covered!
 
 This repository makes it easy to run your MATLAB tests on some of the most common CI platforms. The configuration files take care of setting up MATLAB to work with the CI system and automatically executing your MATLAB tests.
 
-Take a look at the "Quick Start Guide" below to get started!
-
 <br>
 
 
-## Quick start guide
+## Getting started
+### <u>Quick start guide</u>
 Here's how to quickly get this repository running on a CI system:
 1. Fork the repository to your own GitHub account
-2. Go to one of the supported CI platforms and install the available MATLAB CI plugin
-***Note:*** GitHub Actions does not require this step
+2. Go to one of the supported CI platforms and install the available MATLAB CI plugin ***Note:*** GitHub Actions does not require this step
 3. Create a new CI job using your forked repository
 4. Enjoy using CI with MATLAB!
 
@@ -33,6 +31,14 @@ To use your MATLAB code or Simulink<sup>&reg;</sup> models with this repository,
 ***Notes:***
 * In most cases, the configuration files will automatically get picked up by the CI platform during step 3, but some platforms may require you to specify which file to use
 * The default branch for this repository is "main"
+
+<br>
+
+
+### <u>Step-by-step getting started guide for GitHub Actions</u>
+Our Continuous Integration with MATLAB and GitHub Actions Workshop provides a step-by-step guide for getting started with GitHub Actions.
+* https://github.com/mathworks/ci-with-matlab-and-github-actions-workshop
+
 
 <br>
 
