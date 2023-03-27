@@ -62,7 +62,6 @@ jobs:
         uses: matlab-actions/run-tests@v1
         with:
           source-folder: code
-          select-by-folder: test
 
       - name: Send mail
         if: ${{ failure() }}
