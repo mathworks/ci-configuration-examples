@@ -26,7 +26,7 @@ classdef tinstall < matlab.unittest.TestCase
         
         function testRunExample(testCase, example)
             meta = findExample(example);
-            testCase.assumeTrue(isfolder(fullfile(meta.componentDir, 'main')), 'Demos not available');
+            testCase.assumeTrue(any(isfile(fullfile(meta.componentDir,'main',{[meta.main '.m'],[meta.main '.mlx']}))), 'Demo not available');
 
             testCase.applyFixture(PathFixture(meta.componentDir));
             
