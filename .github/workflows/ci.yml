@@ -5,7 +5,6 @@ name: MATLAB matrix build
 # Controls when the action will run.
 on:
   push:
-    branches: [main, hourly-test]
   pull_request:
   workflow_dispatch:
 
