@@ -51,7 +51,7 @@ jobs:
     strategy:
       matrix:
         # Run this workflow on different os
-        os: [windows-2022, ubuntu-22.04, macos-12]
+        os: [ubuntu-22.04] # [windows-2022, ubuntu-22.04, macos-12] restore when Windows and Mac are working again (ETA mid-October)
       fail-fast: false
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
@@ -73,7 +73,7 @@ jobs:
           source-folder: code
 
       - name: Send mail
-        if: ${{ failure() && runner.os == 'Linux' }} # remove Linux check when Windows and Mac are working again
+        if: ${{ failure() }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
