@@ -73,7 +73,7 @@ jobs:
           source-folder: code
 
       - name: Send mail
-        if: ${{ failure() }}
+        if: ${{ failure() && runner.os == 'Linux' }} # remove Linux check when Windows and Mac are working again
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
