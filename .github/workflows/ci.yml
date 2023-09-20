@@ -51,7 +51,7 @@ jobs:
     strategy:
       matrix:
         # Run this workflow on different os
-        os: [ubuntu-22.04] # [windows-2022, ubuntu-22.04, macos-12] restore when Windows and Mac are working again (ETA mid-October)
+        os: [ubuntu-22.04] # [windows-2022, ubuntu-22.04, macos-12] restore when Windows and Mac are working again (ETA mid-October 2023)
       fail-fast: false
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
