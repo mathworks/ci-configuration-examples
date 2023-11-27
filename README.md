@@ -68,7 +68,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 | **GitHub&nbsp;Actions** |  |
 |:-----------------------------|:-|
 | Badge | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) |
-| Badge Code | \[\!\[MATLAB](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/actions/workflows/ci.yml/badge.svg)](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/actions/workflows/ci.yml) |
+| Badge Code | \[\!\[MATLAB](https[]()://github.com/byeongseonmin/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https[]()://github.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***/actions/workflows/ci.yml) |
 | Badge Help | [GitHub Actions documentation for setting up badges](https://docs.github.com/en/actions/managing-workflow-runs/adding-a-workflow-status-badge) |
 
 <br>
