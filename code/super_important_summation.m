@@ -3,6 +3,6 @@ function sum = super_important_summation(a, b)
 
 % Copyright 2022 The MathWorks, Inc.
 
-sum = a + b;
+sum = a + b + 1;
 
 end
