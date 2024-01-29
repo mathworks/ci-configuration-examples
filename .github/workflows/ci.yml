@@ -6,7 +6,7 @@ name: MATLAB Build
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    # branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -33,6 +33,12 @@ jobs:
         uses: matlab-actions/run-tests@v1
         with:
           source-folder: code
+
+      # Run build tasks
+      - name: Run default build tool task
+        uses: matlab-actions/run-build@v1
+        with:
+          task: test
 
       # You can use "run-command" to execute custom MATLAB scripts, functions, or statements.
       #- name: Run custom testing procedure
