@@ -117,6 +117,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 * Jenkins&trade;
 * Travis CI
 * GitLab CI/CD
+* TeamCity
 
 <br>
 
@@ -145,17 +146,18 @@ There are 2 test classes provided:
 
 The repository includes these files:
 
-| **File Path**              | **Description** |
-|:---------------------------|:----------------|
-| [`code/dayofyear.m`](code/dayofyear.m) | The [`dayofyear`](code/dayofyear.m) function returns the day-of-year number for a given date string "mm/dd/yyyy" |
-| [`tests/TestExamples.m`](tests/TestExamples.m) | The [`TestExamples`](tests/TestExamples.m) class provides a few equality and negative tests for the [`dayofyear`](code/dayofyear.m) function |
-| [`tests/ParameterizedTestExample.m`](tests/ParameterizedTestExample.m) | The [`ParameterizedTestExample`](tests/ParameterizedTestExample.m) class provides 12 tests for the [`dayofyear`](code/dayofyear.m) function using the parameterized test format |
-| [`azure-pipelines.yml`](###Azure-DevOps) | The [`azure-pipelines.yml`](azure-pipelines.yml) file defines the pipeline that runs on [Azure DevOps](https://marketplace.visualstudio.com/items?itemName=MathWorks.matlab-azure-devops-extension). |
-| [`.circleci/config.yml`](###CircleCI) | The [`config.yml`](.circleci/config.yml) file defines the pipeline that runs on [CircleCI](https://circleci.com/orbs/registry/orb/mathworks/matlab) |
-| [`.github/workflows/ci.yml`](###GitHub-Actions) | The [`ci.yml`](.github/workflows/ci.yml) file defines the pipeline that runs on [GitHub Actions](https://github.com/matlab-actions/overview) |
-| [`Jenkinsfile`](###Jenkins) | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs on [Jenkins](https://plugins.jenkins.io/matlab/) |
-| [`.travis.yml`](###Travis-CI) | The [`.travis.yml`](.travis.yml) file defines the pipeline that runs on [Travis CI](https://docs.travis-ci.com/user/languages/matlab/) |
-| [`.gitlab-ci.yml`](###GitLab-CI/CD) | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs on [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) |
+| **File Path**                                                          | **Description**                                                                                                                                                                                      |
+|:-----------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`code/dayofyear.m`](code/dayofyear.m)                                 | The [`dayofyear`](code/dayofyear.m) function returns the day-of-year number for a given date string "mm/dd/yyyy"                                                                                     |
+| [`tests/TestExamples.m`](tests/TestExamples.m)                         | The [`TestExamples`](tests/TestExamples.m) class provides a few equality and negative tests for the [`dayofyear`](code/dayofyear.m) function                                                         |
+| [`tests/ParameterizedTestExample.m`](tests/ParameterizedTestExample.m) | The [`ParameterizedTestExample`](tests/ParameterizedTestExample.m) class provides 12 tests for the [`dayofyear`](code/dayofyear.m) function using the parameterized test format                      |
+| [`azure-pipelines.yml`](###Azure-DevOps)                               | The [`azure-pipelines.yml`](azure-pipelines.yml) file defines the pipeline that runs on [Azure DevOps](https://marketplace.visualstudio.com/items?itemName=MathWorks.matlab-azure-devops-extension). |
+| [`.circleci/config.yml`](###CircleCI)                                  | The [`config.yml`](.circleci/config.yml) file defines the pipeline that runs on [CircleCI](https://circleci.com/orbs/registry/orb/mathworks/matlab)                                                  |
+| [`.github/workflows/ci.yml`](###GitHub-Actions)                        | The [`ci.yml`](.github/workflows/ci.yml) file defines the pipeline that runs on [GitHub Actions](https://github.com/matlab-actions/overview)                                                         |
+| [`Jenkinsfile`](###Jenkins)                                            | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs on [Jenkins](https://plugins.jenkins.io/matlab/)                                                                                |
+| [`.travis.yml`](###Travis-CI)                                          | The [`.travis.yml`](.travis.yml) file defines the pipeline that runs on [Travis CI](https://docs.travis-ci.com/user/languages/matlab/)                                                               |
+| [`.gitlab-ci.yml`](###GitLab-CI/CD)                                    | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs on [GitLab CI/CD](https://docs.gitlab.com/ee/ci/)                                                                         |
+| [`.teamcity/settings.kts`](###TeamCity)                                | The [`.teamcity/settings.kts`](.teamcity/settings.kts) file defines the pipeline that runs on [TeamCity](https://www.jetbrains.com/help/teamcity/kotlin-dsl.html)                                                             |
 
 <br>
 
@@ -297,6 +299,41 @@ matlab-test:
   stage: matlab-test
   script:
     - matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
+```
+<br>
+
+### TeamCity
+```kts
+package _Self.buildTypes
+
+import jetbrains.buildServer.configs.kotlin.v2018_2.*
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.perfmon
+import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
+
+object Build : BuildType({
+    name = "Build"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
+
+    steps {
+        step {
+            name = "Run MATLAB tests"
+            type = "matlabTestRunner"
+            param("logLoggingLevel", "Terse")
+            param("pdfTestArtifact", "artifacts/testResults.pdf")
+            param("sourceFolders", "src")
+            param("runTestParallel", "true")
+            param("filterTestFolderByName", "tests")
+            param("logOutputDetail", "None")
+            param("strict", "true")
+            param("tapTestArtifact", "artifacts/tspResults.tap")
+            param("MatlabPathKey", """C:\Program Files\MATLAB\R2024a""")
+        }
+    }
+
+})
 ```
 <br>
 
