@@ -27,4 +27,14 @@ object Build : BuildType({
         }
     }
 
+    triggers {
+        vcs {
+        }
+    }
+
+    features {
+        perfmon {
+        }
+    }
+
 })
