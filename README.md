@@ -157,7 +157,7 @@ The repository includes these files:
 | [`Jenkinsfile`](###Jenkins)                                            | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs on [Jenkins](https://plugins.jenkins.io/matlab/)                                                                                |
 | [`.travis.yml`](###Travis-CI)                                          | The [`.travis.yml`](.travis.yml) file defines the pipeline that runs on [Travis CI](https://docs.travis-ci.com/user/languages/matlab/)                                                               |
 | [`.gitlab-ci.yml`](###GitLab-CI/CD)                                    | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs on [GitLab CI/CD](https://docs.gitlab.com/ee/ci/)                                                                         |
-| [`.teamcity/settings.kts`](###TeamCity)                                | The [`.teamcity/settings.kts`](.teamcity/Settings.kts) file defines the pipeline that runs on [TeamCity](https://www.jetbrains.com/help/teamcity/kotlin-dsl.html)                                                             |
+| [`.teamcity/settings.kts`](###TeamCity)                                | The [`.teamcity/settings.kts`](.teamcity/settings.kts) file defines the pipeline that runs on [TeamCity](https://www.jetbrains.com/help/teamcity/kotlin-dsl.html)                                                             |
 
 <br>
 
