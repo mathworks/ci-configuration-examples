@@ -17,7 +17,7 @@ object Build : BuildType({
             type = "matlabTestRunner"
             param("logLoggingLevel", "Terse")
             param("pdfTestArtifact", "artifacts/testResults.pdf")
-            param("sourceFolders", "src")
+            param("sourceFolders", "code")
             param("runTestParallel", "true")
             param("filterTestFolderByName", "tests")
             param("logOutputDetail", "None")
