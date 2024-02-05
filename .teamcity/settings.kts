@@ -15,14 +15,7 @@ object Build : BuildType({
         step {
             name = "Run MATLAB tests"
             type = "matlabTestRunner"
-            param("logLoggingLevel", "Terse")
-            param("pdfTestArtifact", "artifacts/testResults.pdf")
             param("sourceFolders", "code")
-            param("runTestParallel", "true")
-            param("filterTestFolderByName", "tests")
-            param("logOutputDetail", "None")
-            param("strict", "true")
-            param("tapTestArtifact", "artifacts/tspResults.tap")
             param("MatlabPathKey", """C:\Program Files\MATLAB\R2024a""")
         }
     }
