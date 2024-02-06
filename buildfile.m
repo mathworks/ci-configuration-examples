@@ -14,13 +14,17 @@ plan("test") = TestTask(SourceFiles="code", ...
 % Set default task
 plan.DefaultTasks = "test";
 
+% Make the "test" task dependent on the "setUp" task
 plan("clean") = CleanTask;
 plan("test").Dependencies = "setUp";
 
 end
 
 function setUpTask(context)
+
+% Add source code folder to path
 srcFolder = fullfile(context.Plan.RootFolder, "code");
 addpath(srcFolder);
+
 end
 
