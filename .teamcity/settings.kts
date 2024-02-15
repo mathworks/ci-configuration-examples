@@ -47,7 +47,6 @@ object Build : BuildType({
             param("sourceFolders", "code")
             param("filterTestFolderByName", "tests")
             param("logOutputDetail", "Default")
-            param("tapTestArtifact", "results/test.tap")
             param("MatlabRoot", """C:\Program Files\MATLAB\R2024a""")
         }
     }
