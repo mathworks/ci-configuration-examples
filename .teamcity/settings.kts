@@ -38,6 +38,20 @@ object Build : BuildType({
         root(DslContext.settingsRoot)
     }
 
+    steps {
+        step {
+            id = "matlabTestRunner"
+            type = "matlabTestRunner"
+            param("logLoggingLevel", "Default")
+            param("pdfTestArtifact", "results/test.pdf")
+            param("sourceFolders", "code")
+            param("filterTestFolderByName", "tests")
+            param("logOutputDetail", "Default")
+            param("tapTestArtifact", "results/test.tap")
+            param("MatlabRoot", """C:\Program Files\MATLAB\R2024a""")
+        }
+    }
+
     triggers {
         vcs {
         }
