@@ -42,7 +42,7 @@ object Build : BuildType({
         step {
             id = "matlabTestRunner"
             type = "matlabTestRunner"
-            param("logLoggingLevel", "Default")
+            logLoggingLevel = "Default"
             param("pdfTestArtifact", "results/testResult.pdf")
             param("sourceFolders", "code")
             param("filterTestFolderByName", "tests")
@@ -52,7 +52,7 @@ object Build : BuildType({
         step {
             id = "matlabCommandRunner"
             type = "matlabCommandRunner"
-            param("matlabCommand", "disp('Hello Kotlin')")
+            matlabCommand = "disp('Hello Kotlin')")
             param("MatlabPathKey", """C:\Program Files\MATLAB\R2023b""")
         }
     }
