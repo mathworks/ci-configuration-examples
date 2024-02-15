@@ -24,18 +24,22 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      # Sets up MATLAB on the GitHub Actions runner
-      - name: Setup MATLAB
-        uses: matlab-actions/setup-matlab@v1
+      # Sets up MATLAB on a GitHub-hosted runner
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v2
 
       # Runs a set of commands using the runners shell
       - name: Run all tests
-        uses: matlab-actions/run-tests@v1
+        uses: matlab-actions/run-tests@v2
         with:
           source-folder: code
 
-      # You can use "run-command" to execute custom MATLAB scripts, functions, or statements.
+      # You can use "run-build" to invoke the MATLAB build tool and run build tasks
+      #- name: Run the default "test" task in the build file
+      #   uses: matlab-actions/run-build@v2
+
+      # You can use "run-command" to execute custom MATLAB scripts, functions, or statements
       #- name: Run custom testing procedure
-      #  uses: matlab-actions/run-command@v1
+      #  uses: matlab-actions/run-command@v2
       #  with:
       #    command: disp('Running my custom testing procedure!'); addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
