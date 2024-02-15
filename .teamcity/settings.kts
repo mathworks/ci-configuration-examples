@@ -50,12 +50,7 @@ object Build : BuildType({
             param("logOutputDetail", "Default")
             param("MatlabPathKey", """C:\Program Files\MATLAB\R2023b""")
         }
-        step {
-            id = "matlabCommandRunner"
-            type = "matlabCommandRunner"
-            param("matlabCommand", "disp('Hello Kotlin to CI dev team ')")
-            param("MatlabPathKey", """C:\Program Files\MATLAB\R2023b""")
-        }
+
     }
 
     triggers {
