@@ -43,7 +43,7 @@ object Build : BuildType({
             id = "matlabTestRunner"
             type = "matlabTestRunner"
             param("logLoggingLevel", "Default")
-            param("pdfTestArtifact", "results/test.pdf")
+            param("pdfTestArtifact", "results/testResult.pdf")
             param("sourceFolders", "code")
             param("filterTestFolderByName", "tests")
             param("logOutputDetail", "Default")
@@ -56,8 +56,4 @@ object Build : BuildType({
         }
     }
 
-    features {
-        perfmon {
-        }
-    }
 })
