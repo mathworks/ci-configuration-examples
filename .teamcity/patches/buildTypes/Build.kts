@@ -10,7 +10,7 @@ To apply the patch, change the buildType with id = 'Build'
 accordingly, and delete the patch script.
 */
 changeBuildType(RelativeId("Build")) {
-    expectSteps {
+    steps {
         step {
             id = "matlabTestRunner"
             type = "matlabTestRunner"
@@ -21,20 +21,12 @@ changeBuildType(RelativeId("Build")) {
             param("logOutputDetail", "Default")
             param("MatlabRoot", """C:\Program Files\MATLAB\R2024a""")
         }
-    }
-    steps {
-        update<BuildStep>(0) {
-            clearConditions()
+
+        step {
+            id = "matlabCommandRunner"
+            type = "matlabCommandRunner"
+            param("matlabCommand", "pwd")
             param("MatlabPathKey", """C:\Program Files\MATLAB\R2023b""")
-            param("MatlabRoot", "")
-        }
-        insert(1) {
-            step {
-                id = "matlabCommandRunner"
-                type = "matlabCommandRunner"
-                param("matlabCommand", "pwd")
-                param("MatlabPathKey", """C:\Program Files\MATLAB\R2023b""")
-            }
         }
     }
 }
