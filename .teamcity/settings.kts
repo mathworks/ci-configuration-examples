@@ -40,14 +40,11 @@ object Build : BuildType({
 
     steps {
         step {
-            id = "matlabTestRunner"
-            type = "matlabTestRunner"
-            logLoggingLevel = "Default"
-            param("pdfTestArtifact", "results/testResult.pdf")
-            param("sourceFolders", "code")
-            param("filterTestFolderByName", "tests")
-            param("logOutputDetail", "Default")
-            param("MatlabRoot", """C:\Program Files\MATLAB\R2024a""")
+            matlabTestRunner {
+                logLoggingLevel = "Default"
+                MatlabRoot = """C:\Program Files\MATLAB\R2024a"""
+                sourceFolders = "code"
+            }
         }
         step {
             id = "matlabCommandRunner"
