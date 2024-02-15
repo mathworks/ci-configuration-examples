@@ -1,7 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
-import org.jcp.xml.dsig.internal.dom.DOMUtils
+
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -43,14 +43,12 @@ object Build : BuildType({
         step {
             id = "matlabTestRunner"
             type = "matlabTestRunner"
-           params {
-               "logLoggingLevel" to  "Default"
-               "pdfTestArtifact" to  "results/testResult.pdf"
-               "sourceFolders" to "code"
-               "filterTestFolderByName" to "tests"
-               "logOutputDetail" to "Default"
-               "MatlabRoot" to """C:\Program Files\MATLAB\R2024a"""
-           }
+            param("logLoggingLevel", "Default")
+            param("pdfTestArtifact", "results/testResult.pdf")
+            param("sourceFolders", "code")
+            param("filterTestFolderByName", "tests")
+            param("logOutputDetail", "Default")
+            param("MatlabPathKey", """C:\Program Files\MATLAB\R2023b""")
         }
         step {
             id = "matlabCommandRunner"
@@ -62,6 +60,8 @@ object Build : BuildType({
 
     triggers {
         vcs {
+            perCheckinTriggering = true
+            enableQueueOptimization = false
         }
     }
 
