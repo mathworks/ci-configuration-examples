@@ -52,7 +52,7 @@ object Build : BuildType({
         step {
             id = "matlabCommandRunner"
             type = "matlabCommandRunner"
-            param("matlabCommand", "pwd")
+            param("matlabCommand", "disp('Hello Kotlin')")
             param("MatlabPathKey", """C:\Program Files\MATLAB\R2023b""")
         }
     }
