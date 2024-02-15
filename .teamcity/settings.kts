@@ -49,6 +49,12 @@ object Build : BuildType({
             param("logOutputDetail", "Default")
             param("MatlabRoot", """C:\Program Files\MATLAB\R2024a""")
         }
+        step {
+            id = "matlabCommandRunner"
+            type = "matlabCommandRunner"
+            param("matlabCommand", "pwd")
+            param("MatlabPathKey", """C:\Program Files\MATLAB\R2023b""")
+        }
     }
 
     triggers {
