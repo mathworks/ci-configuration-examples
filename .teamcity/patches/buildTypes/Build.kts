@@ -1,6 +1,7 @@
 package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.BuildStep
 import jetbrains.buildServer.configs.kotlin.ui.*
 
 /*
@@ -22,6 +23,11 @@ changeBuildType(RelativeId("Build")) {
         }
     }
     steps {
+        update<BuildStep>(0) {
+            clearConditions()
+            param("MatlabPathKey", """C:\Program Files\MATLAB\R2023b""")
+            param("MatlabRoot", "")
+        }
         insert(1) {
             step {
                 id = "matlabCommandRunner"
