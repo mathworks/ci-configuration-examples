@@ -9,8 +9,10 @@ plan = buildplan(localfunctions);
 % Add a task to run tests
 plan("test") = matlab.buildtool.tasks.TestTask("tests");
 
+plan("check") = CodeIssuesTask;
+
 % Make the "test" task the default task in the plan
-plan.DefaultTasks = "test";
+plan.DefaultTasks = "check test";
 
 end
 
