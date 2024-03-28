@@ -167,8 +167,8 @@ The repository includes these files:
 pool:
   vmImage: ubuntu-latest
 steps:
-  - task: InstallMATLAB@0
-  - task: RunMATLABTests@0
+  - task: InstallMATLAB@1
+  - task: RunMATLABTests@1
     inputs:
       sourceFolder: code
       codeCoverageCobertura: code-coverage/coverage.xml
@@ -195,11 +195,11 @@ steps:
 ```yml
 version: 2.1
 orbs:
-  matlab: mathworks/matlab@0
+  matlab: mathworks/matlab@1
 jobs:
   build:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:current
     steps:
       - checkout
       - matlab/install

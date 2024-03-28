@@ -1,8 +1,8 @@
 pool:
   vmImage: ubuntu-latest
 steps:
-  - task: InstallMATLAB@0
-  - task: RunMATLABTests@0
+  - task: InstallMATLAB@1
+  - task: RunMATLABTests@1
     inputs:
       sourceFolder: code
       codeCoverageCobertura: code-coverage/coverage.xml
