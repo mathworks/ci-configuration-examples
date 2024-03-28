@@ -4,7 +4,7 @@ orbs:
 jobs:
   build:
     machine:
-      image: ubuntu-2204:2024.01.1
+      image: ubuntu-2204:current
     steps:
       - checkout
       - matlab/install
