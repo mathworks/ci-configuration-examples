@@ -167,8 +167,8 @@ The repository includes these files:
 pool:
   vmImage: ubuntu-22.04
 steps:
-  - task: InstallMATLAB@0
-  - task: RunMATLABTests@0
+  - task: InstallMATLAB@1
+  - task: RunMATLABTests@1
     inputs:
       sourceFolder: code
       codeCoverageCobertura: code-coverage/coverage.xml
@@ -177,14 +177,14 @@ steps:
     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: 'test-results/results.xml'
-  - task: PublishCodeCoverageResults@1
+  - task: PublishCodeCoverageResults@2
     inputs:
       codeCoverageTool: 'Cobertura'
       summaryFileLocation: 'code-coverage/coverage.xml'
       pathToSources: 'code/'
 
   # As an alternative to RunMATLABTests, you can use RunMATLABCommand to execute a MATLAB script, function, or statement.
-  # - task: RunMATLABCommand@0
+  # - task: RunMATLABCommand@1
   #   inputs:
   #     command: addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
 ```
@@ -195,11 +195,11 @@ steps:
 ```yml
 version: 2.1
 orbs:
-  matlab: mathworks/matlab@0
+  matlab: mathworks/matlab@1
 jobs:
   build:
     machine:
-      image: ubuntu-2204:2022.07.1
+      image: ubuntu-2204:current
     steps:
       - checkout
       - matlab/install
@@ -239,21 +239,21 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       # Sets up MATLAB on the GitHub Actions runner
       - name: Setup MATLAB
-        uses: matlab-actions/setup-matlab@v1
+        uses: matlab-actions/setup-matlab@v2
 
       # Runs a set of commands using the runners shell
       - name: Run all tests
-        uses: matlab-actions/run-tests@v1
+        uses: matlab-actions/run-tests@v2
         with:
           source-folder: code
 
       # As an alternative to run-tests, you can use run-command to execute a MATLAB script, function, or statement.
       #- name: Run all tests
-      #  uses: matlab-actions/run-command@v1
+      #  uses: matlab-actions/run-command@v2
       #  with:
       #    command: addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
 ```
