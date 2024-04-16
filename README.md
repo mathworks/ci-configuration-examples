@@ -1,6 +1,6 @@
-| **Azure<sup>&reg;</sup>&nbsp;DevOps** | **CircleCI<sup>&reg;</sup>** | **GitHub<sup>&reg;</sup>&nbsp;Actions** | **Travis&nbsp;CI&trade;** | 
+| **Azure<sup>&reg;</sup>&nbsp;DevOps** | **CircleCI<sup>&reg;</sup>** | **GitHub<sup>&reg;</sup>&nbsp;Actions** | 
 |:---------------------------|:-----------------:|:----------------------------:|:--------------------------:|
-| [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/36) | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples) <br><br> | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) <br><br> | [![Build Status](https://app.travis-ci.com/mathworks/ci-configuration-examples.svg)](https://app.travis-ci.com/mathworks/ci-configuration-examples) <br><br> |
+| [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/36) | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples) <br><br> | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) <br><br> |
 
 
 # Continuous Integration (CI) configuration examples for MATLAB<sup>&reg;</sup>
@@ -73,14 +73,6 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 
 <br>
 
-| **Travis&nbsp;CI** |  |
-|:--------------------------|:-|
-| Badge | [![Build Status](https://app.travis-ci.com/mathworks/ci-configuration-examples.svg)](https://app.travis-ci.com/mathworks/ci-configuration-examples) |
-| Badge Code | \[\!\[Build Status](https[]()://app.travis-ci.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***.svg)](https[]()://app.travis-ci.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***) |
-| Badge Help | [Travis CI documentation for setting up badges](https://docs.travis-ci.com/user/status-images/ "Travis CI documentation for setting up badges") |
-
-<br>
-
 | **GitLab&nbsp;CI/CD** |  |
 |:--------------------------|:-|
 | Badge Code | \[\!\[Pipeline Status](https[]()://gitlab.com/***GITLAB_PROJECT_PATH***/badges/***DEFAULT_BRANCH_NAME***/pipeline.svg)](https[]()://gitlab.com/***GITLAB_PROJECT_PATH***) |
@@ -115,14 +107,13 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 * CircleCI
 * GitHub Actions
 * Jenkins&trade;
-* Travis CI
 * GitLab CI/CD
 
 <br>
 
 
 ## About the code
-The primary goal of this repository is to provide a set of configuration files as templates that illustrate how to run MATLAB on various CI platforms (e.g., Azure DevOps, CircleCI, GitHub Actions, Jenkins, Travis CI).
+The primary goal of this repository is to provide a set of configuration files as templates that illustrate how to run MATLAB on various CI platforms (e.g., Azure DevOps, CircleCI, GitHub Actions, Jenkins).
 
 Each of these pipeline definitions does four things:
 
@@ -154,7 +145,6 @@ The repository includes these files:
 | [`.circleci/config.yml`](###CircleCI) | The [`config.yml`](.circleci/config.yml) file defines the pipeline that runs on [CircleCI](https://circleci.com/orbs/registry/orb/mathworks/matlab) |
 | [`.github/workflows/ci.yml`](###GitHub-Actions) | The [`ci.yml`](.github/workflows/ci.yml) file defines the pipeline that runs on [GitHub Actions](https://github.com/matlab-actions/overview) |
 | [`Jenkinsfile`](###Jenkins) | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs on [Jenkins](https://plugins.jenkins.io/matlab/) |
-| [`.travis.yml`](###Travis-CI) | The [`.travis.yml`](.travis.yml) file defines the pipeline that runs on [Travis CI](https://docs.travis-ci.com/user/languages/matlab/) |
 | [`.gitlab-ci.yml`](###GitLab-CI/CD) | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs on [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) |
 
 <br>
@@ -184,7 +174,7 @@ steps:
       pathToSources: 'code/'
 
   # As an alternative to RunMATLABTests, you can use RunMATLABCommand to execute a MATLAB script, function, or statement.
-  # - task: RunMATLABCommand@0
+  # - task: RunMATLABCommand@1
   #   inputs:
   #     command: addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
 ```
@@ -285,13 +275,6 @@ pipeline {
 
 <br>
 
-### Travis CI
-```yml
-language: matlab
-script: matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
-```
-<br>
-
 ### GitLab CI/CD
 ```yml
 stages:         
@@ -306,7 +289,6 @@ matlab-test:
 
 
 ## Caveats
-* MATLAB builds on Travis CI are available only for public projects.
 * MATLAB builds on Azure DevOps, CircleCI, and GitHub Actions that use CI service-hosted agents are also available only for public projects. However, these integrations can also be used in private projects that leverage self-hosted runners/agents.
 
 <br>
