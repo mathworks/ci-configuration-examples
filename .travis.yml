@@ -1,9 +1,0 @@
-language: matlab
-dist: jammy
-script: matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
-notifications:
-  email:
-    recipients:
-      - $CI_INTERNAL_EMAIL
-    on_success: change
-    on_failure: always
