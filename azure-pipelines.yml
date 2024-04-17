@@ -20,6 +20,6 @@ steps:
       pathToSources: 'code/'
 
   # As an alternative to RunMATLABTests, you can use RunMATLABCommand to execute a MATLAB script, function, or statement.
-  # - task: RunMATLABCommand@0
+  # - task: RunMATLABCommand@1
   #   inputs:
   #     command: addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
