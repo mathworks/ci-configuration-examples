@@ -1,6 +1,6 @@
-| **Azure<sup>&reg;</sup>&nbsp;DevOps** | **CircleCI<sup>&reg;</sup>** | **GitHub<sup>&reg;</sup>&nbsp;Actions** | **Travis&nbsp;CI&trade;** |
-|:---------------------------|:-----------------:|:----------------------------:|--------------------------:|
-| [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples?branchName=hourly)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build/latest?definitionId=38&branchName=hourly) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/38) | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples/tree/hourly.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples/?branch=hourly) <br><br> | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg?branch=hourly)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) <br><br> | [![Build Status](https://travis-ci.com/mathworks/ci-configuration-examples.svg?branch=hourly)](https://travis-ci.com/mathworks/ci-configuration-examples) <br><br> |
+| **Azure<sup>&reg;</sup>&nbsp;DevOps** | **CircleCI<sup>&reg;</sup>** | **GitHub<sup>&reg;</sup>&nbsp;Actions** | 
+|:---------------------------|:-----------------:|:----------------------------:|
+| [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/36) | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples) <br><br> | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) <br><br> |
 
 
 # Continuous Integration (CI) configuration examples for MATLAB<sup>&reg;</sup>
@@ -73,14 +73,6 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 
 <br>
 
-| **Travis&nbsp;CI** |  |
-|:--------------------------|:-|
-| Badge | [![Build Status](https://app.travis-ci.com/mathworks/ci-configuration-examples.svg)](https://app.travis-ci.com/mathworks/ci-configuration-examples) |
-| Badge Code | \[\!\[Build Status](https[]()://app.travis-ci.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***.svg)](https[]()://app.travis-ci.com/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***) |
-| Badge Help | [Travis CI documentation for setting up badges](https://docs.travis-ci.com/user/status-images/ "Travis CI documentation for setting up badges") |
-
-<br>
-
 | **GitLab&nbsp;CI/CD** |  |
 |:--------------------------|:-|
 | Badge Code | \[\!\[Pipeline Status](https[]()://gitlab.com/***GITLAB_PROJECT_PATH***/badges/***DEFAULT_BRANCH_NAME***/pipeline.svg)](https[]()://gitlab.com/***GITLAB_PROJECT_PATH***) |
@@ -115,14 +107,13 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 * CircleCI
 * GitHub Actions
 * Jenkins&trade;
-* Travis CI
 * GitLab CI/CD
 
 <br>
 
 
 ## About the code
-The primary goal of this repository is to provide a set of configuration files as templates that illustrate how to run MATLAB on various CI platforms (e.g., Azure DevOps, CircleCI, GitHub Actions, Jenkins, Travis CI).
+The primary goal of this repository is to provide a set of configuration files as templates that illustrate how to run MATLAB on various CI platforms (e.g., Azure DevOps, CircleCI, GitHub Actions, Jenkins).
 
 Each of these pipeline definitions does four things:
 
@@ -154,7 +145,6 @@ The repository includes these files:
 | [`.circleci/config.yml`](###CircleCI) | The [`config.yml`](.circleci/config.yml) file defines the pipeline that runs on [CircleCI](https://circleci.com/orbs/registry/orb/mathworks/matlab) |
 | [`.github/workflows/ci.yml`](###GitHub-Actions) | The [`ci.yml`](.github/workflows/ci.yml) file defines the pipeline that runs on [GitHub Actions](https://github.com/matlab-actions/overview) |
 | [`Jenkinsfile`](###Jenkins) | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs on [Jenkins](https://plugins.jenkins.io/matlab/) |
-| [`.travis.yml`](###Travis-CI) | The [`.travis.yml`](.travis.yml) file defines the pipeline that runs on [Travis CI](https://docs.travis-ci.com/user/languages/matlab/) |
 | [`.gitlab-ci.yml`](###GitLab-CI/CD) | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs on [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) |
 
 <br>
@@ -165,7 +155,7 @@ The repository includes these files:
 ### Azure DevOps
 ```yml
 pool:
-  vmImage: ubuntu-22.04
+  vmImage: ubuntu-latest
 steps:
   - task: InstallMATLAB@1
   - task: RunMATLABTests@1
@@ -177,7 +167,7 @@ steps:
     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: 'test-results/results.xml'
-  - task: PublishCodeCoverageResults@2
+  - task: PublishCodeCoverageResults@1
     inputs:
       codeCoverageTool: 'Cobertura'
       summaryFileLocation: 'code-coverage/coverage.xml'
@@ -199,7 +189,7 @@ orbs:
 jobs:
   build:
     machine:
-      image: ubuntu-2204:2024.01.1
+      image: ubuntu-2204:current
     steps:
       - checkout
       - matlab/install
@@ -234,15 +224,15 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
       
-      # Sets up MATLAB on the GitHub Actions runner
-      - name: Setup MATLAB
+      # Sets up MATLAB on a GitHub-hosted runner
+      - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2
 
       # Runs a set of commands using the runners shell
@@ -251,11 +241,15 @@ jobs:
         with:
           source-folder: code
 
-      # As an alternative to run-tests, you can use run-command to execute a MATLAB script, function, or statement.
-      #- name: Run all tests
+      # You can use "run-build" to invoke the MATLAB build tool and run build tasks
+      #- name: Run the default "test" task in the build file
+      #   uses: matlab-actions/run-build@v2
+
+      # You can use "run-command" to execute custom MATLAB scripts, functions, or statements
+      #- name: Run custom testing procedure
       #  uses: matlab-actions/run-command@v2
       #  with:
-      #    command: addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
+      #    command: disp('Running my custom testing procedure!'); addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
 ```
 
 <br>
@@ -281,14 +275,6 @@ pipeline {
 
 <br>
 
-### Travis CI
-```yml
-language: matlab
-dist: jammy
-script: matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
-```
-<br>
-
 ### GitLab CI/CD
 ```yml
 stages:         
@@ -303,8 +289,7 @@ matlab-test:
 
 
 ## Caveats
-* MATLAB builds on Travis CI are available only for public projects.
-* MATLAB builds on Azure DevOps, CircleCI, and GitHub Actions that use CI service-hosted agents are also available only for public projects. However, these integrations can also be used in private projects that leverage self-hosted runners/agents.
+* On cloud-hosted agents provided by Azure DevOps, CircleCI, and GitHub Actions, you need a [MATLAB batch licensing token](https://github.com/mathworks-ref-arch/matlab-dockerfile/blob/main/alternates/non-interactive/MATLAB-BATCH.md#matlab-batch-licensing-token) if your project is private or if your pipeline includes transformation products, such as MATLAB Coder&trade; and MATLAB Compiler&trade;. You can request a token by contacting MathWorks&reg; at [batch-tokens@mathworks.com](mailto:batch-tokens@mathworks.com).
 
 <br>
 
