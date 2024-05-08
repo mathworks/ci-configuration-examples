@@ -38,7 +38,7 @@ jobs:
       - name: Run all tests
         uses: matlab-actions/run-tests@v2
         with:
-          source-folder: code
+          source-folder: ${{ github.repository }}
 
       # You can use "run-build" to invoke the MATLAB build tool and run build tasks
       #- name: Run the default "test" task in the build file
