@@ -1,0 +1,14 @@
+jobs:
+  - ${{ each image in parameters.IMAGE }}:
+    - ${{ each release in parameters.RELEASE }}:
+      - job:
+        displayName: ${{ format('{0} {1}', image, release) }}
+        pool:
+          vmImage: ${{ image }}
+        steps:
+          - task: InstallMATLAB@1
+            inputs:
+              release: ${{ release }}
+          - task: RunMATLABTests@1
+            inputs:
+              sourceFolder: code
