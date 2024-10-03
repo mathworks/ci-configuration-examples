@@ -23,6 +23,9 @@ jobs:
 
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
+        with:
+          release: ${{ matrix.release }}
+          products: Optimization_Toolbox Curve_Fitting_Toolbox
         
       - name: Run tests and generate artifacts
         uses: matlab-actions/run-tests@v2

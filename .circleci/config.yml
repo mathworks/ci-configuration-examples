@@ -27,6 +27,7 @@ jobs:
       - checkout
       - matlab/install:
           release: <<parameters.release>>
+          products: Optimization_Toolbox Curve_Fitting_Toolbox
       - matlab/run-tests:
           source-folder: code
 

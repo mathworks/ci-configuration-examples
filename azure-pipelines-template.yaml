@@ -9,6 +9,7 @@ jobs:
           - task: InstallMATLAB@1
             inputs:
               release: ${{ release }}
+              products: Optimization_Toolbox Curve_Fitting_Toolbox
           - task: RunMATLABTests@1
             inputs:
               sourceFolder: code

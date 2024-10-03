@@ -7,8 +7,7 @@ classdef tinstall < matlab.unittest.TestCase
             'signal_blocks', 'curve_fitting_toolbox'}
         restricted = {'rtw_embedded_coder', 'filter_design_hdl_coder', 'gpu_coder', ...
             'simulink_hdl_coder', 'matlab_coder', 'real-time_workshop', 'simulink_plc_coder'}
-        example = {'matlab/intro', 'optim/SolveAConstrainedNonlinearProblemProblemBasedExample', ...
-            'curvefit/FitPolynomialExample', 'simulink_general/sldemo_bounceExample'}
+        example = {'matlab', 'optimization_toolbox', 'curve_fitting_toolbox'}
     end
     
     methods (Test)
@@ -25,15 +24,12 @@ classdef tinstall < matlab.unittest.TestCase
         end
         
         function testRunExample(testCase, example)
-            meta = findExample(example);
-            testCase.assumeTrue(isfolder(fullfile(meta.componentDir, 'main')), 'Demo not available');
-
-            testCase.applyFixture(PathFixture(meta.componentDir));
+            testCase.assumeTrue(isInstalled(example), 'Product not installed');
             
             startingFigs = findall(groot, 'Type','figure');
             testCase.addTeardown(@() close(setdiff(findall(groot, 'Type','figure'), startingFigs)));
             
-            [log, ex] = evalc('runDemo(fullfile(meta.componentDir, ''main'', meta.main));');
+            [log, ex] = evalc('runExample(fullfile(''examples'',example));');
             if ~isempty(ex)
                 disp(log);
                 rethrow(ex);
@@ -43,21 +39,29 @@ classdef tinstall < matlab.unittest.TestCase
     
 end
 
-function ex = runDemo(demo) %#ok<DEFNU> evalc
+function ex = runExample(example)
 try
-run(demo)
-ex = MException.empty;
+    run(example)
+    ex = MException.empty;
 catch ex
 end
+end
+
+function tf = isInstalled(productName)
+v = ver();
+n = strrep(productName, '_', ' ');
+tf = any(strcmpi(n, {v.Name}));
 end
 
 % imports
 function c = IsTrue(varargin)
 c = matlab.unittest.constraints.IsTrue(varargin{:});
 end
+
 function c = IsFalse(varargin)
 c = matlab.unittest.constraints.IsFalse(varargin{:});
 end
+
 function c = PathFixture(varargin)
 c = matlab.unittest.fixtures.PathFixture(varargin{:});
 end
