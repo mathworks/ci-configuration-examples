@@ -28,7 +28,7 @@ classdef tinstall < matlab.unittest.TestCase
         end
         
         function testRunExample(testCase, example)
-            testCase.assumeTrue(isInstalled(example), 'Product not installed');
+            testCase.verifyTrue(isInstalled(example), 'Product not installed');
             
             startingFigs = findall(groot, 'Type','figure');
             testCase.addTeardown(@() close(setdiff(findall(groot, 'Type','figure'), startingFigs)));
