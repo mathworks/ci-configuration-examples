@@ -1,7 +1,9 @@
 pool:
-  vmImage: ubuntu-22.04
+  vmImage: ubuntu-latest
 steps:
   - task: InstallMATLAB@1
+    inputs:
+      products: Optimization_Toolbox Curve_Fitting_Toolbox
   - task: RunMATLABTests@1
     inputs:
       sourceFolder: code
