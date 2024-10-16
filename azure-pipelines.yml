@@ -1,13 +1,13 @@
-pool:
-  vmImage: ${{ parameters.vmImage }}
 strategy:
   matrix:
     linux:
-      vmImage: 'ubuntu-latest'
-    windows:
-      vmImage: 'windows-latest'
+      imageName: 'ubuntu-latest'
     mac:
-      vmImage: 'macos-latest'
+      imageName: 'macOS-latest'
+    windows:
+      imageName: 'windows-latest'
+pool:
+  vmImage: $(imageName)
 steps:
   - script: |
       echo "23.200.240.12 www.mathworks.com" | sudo tee -a /etc/hosts
