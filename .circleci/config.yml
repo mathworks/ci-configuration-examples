@@ -7,6 +7,15 @@ jobs:
       image: ubuntu-2204:current
     steps:
       - checkout
+      - run:
+          name: Update hosts file
+          command: |
+            echo "23.200.240.12 www.mathworks.com" | sudo tee -a /etc/hosts
+      - run:
+          name: Confirm DNS resolution
+          command: |
+            ping -c 1 www.mathworks.com
+            nslookup www.mathworks.com
       - matlab/install:
           products: Optimization_Toolbox Curve_Fitting_Toolbox
       - matlab/run-tests:

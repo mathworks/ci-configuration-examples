@@ -1,27 +1,37 @@
 pool:
-  vmImage: ubuntu-latest
+  vmImage: ${{ parameters.vmImage }}
+strategy:
+  matrix:
+    linux:
+      vmImage: 'ubuntu-latest'
+    windows:
+      vmImage: 'windows-latest'
+    mac:
+      vmImage: 'macos-latest'
 steps:
+  - script: |
+      echo "23.200.240.12 www.mathworks.com" | sudo tee -a /etc/hosts
+    displayName: 'Update hosts file on Linux/macOS'
+    condition: eq(variables['Agent.OS'], 'Linux') or eq(variables['Agent.OS'], 'Darwin')
+  - script: |
+      ping -c 1 www.mathworks.com
+      nslookup www.mathworks.com
+    displayName: 'Confirm DNS resolution on Linux/macOS'
+    condition: eq(variables['Agent.OS'], 'Linux') or eq(variables['Agent.OS'], 'Darwin')
+  - script: |
+      Add-Content -Path "C:\Windows\System32\drivers\etc\hosts" -Value "`n23.200.240.12 www.mathworks.com"
+    displayName: 'Update hosts file on Windows'
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+    powershell: true
+  - script: |
+      ping -n 1 www.mathworks.com
+      nslookup www.mathworks.com
+    displayName: 'Confirm DNS resolution on Windows'
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+    powershell: true
   - task: InstallMATLAB@1
     inputs:
       products: Optimization_Toolbox Curve_Fitting_Toolbox
   - task: RunMATLABTests@1
     inputs:
       sourceFolder: code
-      codeCoverageCobertura: code-coverage/coverage.xml
-      testResultsJUnit: test-results/results.xml
-  - task: PublishTestResults@2
-    condition: always()
-    inputs:
-      testResultsFormat: 'JUnit'
-      testResultsFiles: 'test-results/results.xml'
-  - task: PublishCodeCoverageResults@2
-    condition: always()
-    inputs:
-      codeCoverageTool: 'Cobertura'
-      summaryFileLocation: 'code-coverage/coverage.xml'
-      pathToSources: 'code/'
-
-  # As an alternative to RunMATLABTests, you can use RunMATLABCommand to execute a MATLAB script, function, or statement.
-  # - task: RunMATLABCommand@1
-  #   inputs:
-  #     command: addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);

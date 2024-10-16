@@ -9,44 +9,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-v1:
-    strategy:
-      matrix:
-        # Run this workflow on different os
-        os: [ubuntu-latest]
-      fail-fast: false
-    # The type of runner that the job will run on
-    runs-on: ${{ matrix.os }}
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-
-      # Sets up MATLAB on the GitHub Actions runner
-      - name: Setup MATLAB
-        uses: matlab-actions/setup-matlab@v1
-
-      # Runs a set of commands using the runners shell
-      - name: Run tests and generate artifacts
-        uses: matlab-actions/run-tests@v1
-        with:
-          source-folder: code
-
-      - name: Send mail
-        if: ${{ failure() }}
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
-          to: ${{ secrets.CI_INTERNAL_EMAIL }}
-          from: ${{ secrets.MAIL_USERNAME }}
-          secure: true
-          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
-
   build-v2:
     strategy:
       matrix:
@@ -62,6 +24,30 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Update hosts file on Linux/macOS
+        if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' || matrix.os == 'macos-13'
+        run: |
+          echo "23.200.240.12 www.mathworks.com" | sudo tee -a /etc/hosts
+
+      - name: Confirm DNS resolution on Linux/macOS
+        if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' || matrix.os == 'macos-13'
+        run: |
+          ping -c 1 www.mathworks.com
+          nslookup www.mathworks.com
+
+      - name: Update hosts file on Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          Add-Content -Path "C:\Windows\System32\drivers\etc\hosts" -Value "`n23.200.240.12 www.mathworks.com"
+        shell: pwsh
+
+      - name: Confirm DNS resolution on Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          ping -n 1 www.mathworks.com
+          nslookup www.mathworks.com
+        shell: pwsh
+
       # Sets up MATLAB on the GitHub Actions runner
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
@@ -73,59 +59,3 @@ jobs:
         uses: matlab-actions/run-tests@v2
         with:
           source-folder: code
-
-      - name: Send mail
-        if: ${{ failure() }}
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
-          to: ${{ secrets.CI_INTERNAL_EMAIL }}
-          from: ${{ secrets.MAIL_USERNAME }}
-          secure: true
-          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
-
-  build-v2-with-cache:
-    strategy:
-      matrix:
-        # Run this workflow on different os
-        os: [windows-latest, ubuntu-latest, macos-latest, macos-13]
-      fail-fast: false
-    # The type of runner that the job will run on
-    runs-on: ${{ matrix.os }}
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      # Sets up MATLAB on the GitHub Actions runner
-      - name: Setup MATLAB
-        uses: matlab-actions/setup-matlab@v2
-        with:
-          products: Optimization_Toolbox Curve_Fitting_Toolbox
-          cache: true
-
-      # Runs a set of commands using the runners shell
-      - name: Run tests and generate artifacts
-        uses: matlab-actions/run-tests@v2
-        with:
-          source-folder: code
-
-      - name: Send mail
-        if: ${{ failure() }}
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
-          to: ${{ secrets.CI_INTERNAL_EMAIL }}
-          from: ${{ secrets.MAIL_USERNAME }}
-          secure: true
-          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
