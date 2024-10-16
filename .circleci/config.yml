@@ -14,8 +14,8 @@ jobs:
       - run:
           name: Confirm DNS resolution
           command: |
-            ping -c 1 www.mathworks.com
-            nslookup www.mathworks.com
+            ping -c 1 www.mathworks.com || true
+            nslookup www.mathworks.com || true
       - matlab/install:
           products: Optimization_Toolbox Curve_Fitting_Toolbox
       - matlab/run-tests:
