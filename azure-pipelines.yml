@@ -12,12 +12,12 @@ steps:
   - script: |
       echo "23.200.240.12 www.mathworks.com" | sudo tee -a /etc/hosts
     displayName: 'Update hosts file on Linux/macOS'
-    condition: eq(variables['Agent.OS'], 'Linux') or eq(variables['Agent.OS'], 'Darwin')
+    condition: or(eq(variables['Agent.OS'], 'Linux'), eq(variables['Agent.OS'], 'Darwin'))
   - script: |
       ping -c 1 www.mathworks.com || true
       nslookup www.mathworks.com || true
     displayName: 'Confirm DNS resolution on Linux/macOS'
-    condition: eq(variables['Agent.OS'], 'Linux') or eq(variables['Agent.OS'], 'Darwin')
+    condition: or(eq(variables['Agent.OS'], 'Linux'), eq(variables['Agent.OS'], 'Darwin'))
   - script: |
       Add-Content -Path "C:\Windows\System32\drivers\etc\hosts" -Value "`n23.200.240.12 www.mathworks.com"
     displayName: 'Update hosts file on Windows'
