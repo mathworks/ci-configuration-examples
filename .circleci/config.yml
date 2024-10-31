@@ -6,7 +6,7 @@ jobs:
     machine:
       image: ubuntu-2204:current
     environment:
-      MATLAB_LOG_DIR: ~/project/logs
+      MATLAB_LOG_DIR: /home/circleci/project/logs
       MW_DIAGNOSTIC_DEST: file
       MW_DIAGNOSTIC_SPEC: cppmicroservices::framework.*=all;install.*=all;
       MW_VERBOSE_HTTPCLIENT_CORE: 1
@@ -17,7 +17,7 @@ jobs:
       - matlab/run-tests:
           source-folder: code
       - store_artifacts:
-          path: ~/project/logs
+          path: /home/circleci/project/logs
           destination: matlab-logs
           when: always
 
