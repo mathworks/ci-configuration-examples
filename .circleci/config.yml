@@ -14,11 +14,11 @@ jobs:
       - checkout
       - matlab/install:
           products: Optimization_Toolbox Curve_Fitting_Toolbox
-      - run:
-          name: Display MPM logs
-          command: for file in mylog.txt/*; do [ -f "$file" ] && echo "==> $file <==" && cat "$file"; done 
       - matlab/run-tests:
           source-folder: code
+      - run:
+          name: Print MPM and MATLAB logs
+          command: for file in /home/circleci/project/logs/*; do [ -f "$file" ] && echo "==> $file <==" && cat "$file"; done
 
       # As an alternative to run-tests, you can use run-command to execute a MATLAB script, function, or statement.
       # - matlab/run-command:
