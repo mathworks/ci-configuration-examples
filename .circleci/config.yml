@@ -19,7 +19,7 @@ jobs:
       - store_artifacts:
           path: /home/circleci/project/logs
           destination: matlab-logs
-          when: always
+          when: on_fail
 
       # As an alternative to run-tests, you can use run-command to execute a MATLAB script, function, or statement.
       # - matlab/run-command:

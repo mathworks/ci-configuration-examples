@@ -82,14 +82,12 @@ jobs:
           source-folder: code
 
       - name: Upload MPM and MATLAB logs
-        if: ${{ always() }}
+        if: ${{ failure() }}
         uses: actions/upload-artifact@v4
         with:
           name: matlab-logs-${{ github.job }}-${{ matrix.os }}
           path: ${{ env.MATLAB_LOG_DIR }}
           if-no-files-found: ignore
-          compression-level: 9
-          retention-days: 7
 
       - name: Send mail
         if: ${{ failure() }}
@@ -141,14 +139,12 @@ jobs:
           source-folder: code
 
       - name: Upload MPM and MATLAB logs
-        if: ${{ always() }}
+        if: ${{ failure() }}
         uses: actions/upload-artifact@v4
         with:
           name: matlab-logs-${{ github.job }}-${{ matrix.os }}
           path: ${{ env.MATLAB_LOG_DIR }}
           if-no-files-found: ignore
-          compression-level: 9
-          retention-days: 7
 
       - name: Send mail
         if: ${{ failure() }}

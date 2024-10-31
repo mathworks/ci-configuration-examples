@@ -26,7 +26,7 @@ steps:
       summaryFileLocation: 'code-coverage/coverage.xml'
       pathToSources: 'code/'
   - task: PublishBuildArtifacts@1
-    condition: always()
+    condition: failed()
     inputs:
       PathtoPublish: $(MATLAB_LOG_DIR)
       ArtifactName: matlab-logs
