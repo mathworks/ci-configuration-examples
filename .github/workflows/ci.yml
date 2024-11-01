@@ -55,8 +55,7 @@ jobs:
       fail-fast: false
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
-
-    # Set up verbose logging
+    
     env:
       MATLAB_LOG_DIR: ${{ github.workspace }}/logs
       MW_DIAGNOSTIC_DEST: file
@@ -112,7 +111,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
 
-    # Set up verbose logging
     env:
       MATLAB_LOG_DIR: ${{ github.workspace }}/logs
       MW_DIAGNOSTIC_DEST: file

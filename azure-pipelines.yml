@@ -3,7 +3,7 @@ pool:
 variables:
   MATLAB_LOG_DIR: $(Build.SourcesDirectory)/logs
   MW_DIAGNOSTIC_DEST: file
-  MW_DIAGNOSTIC_SPEC: "cppmicroservices::framework.*=all;install.*=all;"
+  MW_DIAGNOSTIC_SPEC: cppmicroservices::framework.*=all;install.*=all;
   MW_VERBOSE_HTTPCLIENT_CORE: 1
 steps:
   - task: InstallMATLAB@1
@@ -22,9 +22,9 @@ steps:
   - task: PublishCodeCoverageResults@2
     condition: always()
     inputs:
-      codeCoverageTool: 'Cobertura'
-      summaryFileLocation: 'code-coverage/coverage.xml'
-      pathToSources: 'code/'
+      codeCoverageTool: Cobertura
+      summaryFileLocation: code-coverage/coverage.xml
+      pathToSources: code/
   - task: PublishBuildArtifacts@1
     condition: failed()
     inputs:
