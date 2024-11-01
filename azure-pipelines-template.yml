@@ -19,8 +19,8 @@ jobs:
             inputs:
               sourceFolder: code
           - task: PublishBuildArtifacts@1
-              condition: failed()
-              inputs:
-                PathtoPublish: $(MATLAB_LOG_DIR)
-                ArtifactName: matlab-logs
-              displayName: Publish MPM and MATLAB logs
+            condition: failed()
+            inputs:
+              PathtoPublish: $(MATLAB_LOG_DIR)
+              ArtifactName: matlab-logs
+            displayName: Publish MPM and MATLAB logs

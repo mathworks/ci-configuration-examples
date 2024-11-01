@@ -13,8 +13,7 @@ executors:
       xcode: 14.2.0
     resource_class: macos.m1.medium.gen1
   windows: 
-    name: win/default
-    shell: bash.exe
+    win/default
 
 jobs:
   build:
@@ -37,11 +36,12 @@ jobs:
       - matlab/run-tests:
           source-folder: code
       - run:
-           command: tar -cvzf matlab-logs.tar /home/circleci/project/logs
-           when: on_fail
-       - store_artifacts: 
-           path: matlab-logs.tar
-           when: on_fail
+          command: tar -cvzf matlab-logs.tar /home/circleci/project/logs
+          when: on_fail
+          shell: bash
+      - store_artifacts:
+          path: matlab-logs.tar
+          when: on_fail
 
 workflows:
   all-builds:
