@@ -13,7 +13,8 @@ executors:
       xcode: 14.2.0
     resource_class: macos.m1.medium.gen1
   windows: 
-    win/default
+    name: win/default
+    shell: bash.exe
 
 jobs:
   build:
@@ -23,6 +24,11 @@ jobs:
       release:
         type: string
     executor: <<parameters.os>>
+    environment:
+       MATLAB_LOG_DIR: /home/circleci/project/logs
+       MW_DIAGNOSTIC_DEST: file
+       MW_DIAGNOSTIC_SPEC: cppmicroservices::framework.*=all;install.*=all;
+       MW_VERBOSE_HTTPCLIENT_CORE: 1
     steps:
       - checkout
       - matlab/install:
@@ -30,6 +36,12 @@ jobs:
           products: Optimization_Toolbox Curve_Fitting_Toolbox
       - matlab/run-tests:
           source-folder: code
+      - run:
+           command: tar -cvzf matlab-logs.tar /home/circleci/project/logs
+           when: on_fail
+       - store_artifacts: 
+           path: matlab-logs.tar
+           when: on_fail
 
 workflows:
   all-builds:
