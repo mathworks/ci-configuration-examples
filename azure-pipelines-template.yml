@@ -5,6 +5,11 @@ jobs:
         displayName: ${{ format('{0} {1}', image, release) }}
         pool:
           vmImage: ${{ image }}
+        variables:
+          MATLAB_LOG_DIR: $(Build.SourcesDirectory)/logs
+          MW_DIAGNOSTIC_DEST: file
+          MW_DIAGNOSTIC_SPEC: cppmicroservices::framework.*=all;install.*=all;
+          MW_VERBOSE_HTTPCLIENT_CORE: 1
         steps:
           - task: InstallMATLAB@1
             inputs:
@@ -13,3 +18,9 @@ jobs:
           - task: RunMATLABTests@1
             inputs:
               sourceFolder: code
+          - task: PublishBuildArtifacts@1
+            condition: failed()
+            inputs:
+              PathtoPublish: $(MATLAB_LOG_DIR)
+              ArtifactName: matlab-logs
+            displayName: Publish MPM and MATLAB logs
