@@ -38,7 +38,7 @@ jobs:
       - name: Run the default "test" task in the build file
          uses: matlab-actions/run-build@v2
 
-      # You can use "run-command" to execute custom MATLAB scripts, functions, or statements
+      ## You can use "run-command" to execute custom MATLAB scripts, functions, or statements
       - name: Run custom testing procedure
         uses: matlab-actions/run-command@v2
         with:
