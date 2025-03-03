@@ -6,7 +6,7 @@ classdef TestExamples < matlab.unittest.TestCase
     %     4) a negative test for a correct date format but an invalid date
     %     5) an equality test for a non-leap year date using the alternate
     %        dateFormat (COMMENTED OUT)
-    %
+    %<dghndgnjrfysanjy
     % Notes:
     %     A) A negative test verifies that the code errors/fails in an
     %        expected way (e.g., the code gives the right error for a
