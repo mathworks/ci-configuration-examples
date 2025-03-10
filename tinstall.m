@@ -9,7 +9,7 @@ classdef tinstall < matlab.unittest.TestCase
             'simulink_hdl_coder', 'matlab_coder', 'simulink_plc_coder', 'matlab_excel_builder', ...
             'compiler', 'matlab_builder_for_java', 'matlab_builder_for_dot_net', ...
             'simulink_code_inspector', 'simulink_design_verifier', 'real-time_workshop', 'simulink_compiler'}
-            % Add to restricted list once licensing server is fixed (a few weeks after 10/7/24)
+            % Should be restricted in v2, but is showing up in v1. Add after we deprecate hourly for v1
             % ''polyspace_client_c_cpp'
         example = {'matlab', 'optimization_toolbox', 'curve_fitting_toolbox'}
     end
