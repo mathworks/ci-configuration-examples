@@ -8,9 +8,9 @@ classdef tinstall < matlab.unittest.TestCase
         restricted = {'rtw_embedded_coder', 'filter_design_hdl_coder', 'gpu_coder', ...
             'simulink_hdl_coder', 'matlab_coder', 'simulink_plc_coder', 'matlab_excel_builder', ...
             'compiler', 'matlab_builder_for_java', 'matlab_builder_for_dot_net', ...
-            'polyspace_client_c_cpp', 'simulink_compiler'}
+            'simulink_code_inspector', 'simulink_design_verifier', 'real-time_workshop', 'simulink_compiler'}
             % Add to restricted list once licensing server is fixed (a few weeks after 10/7/24)
-            % 'simulink_code_inspector', 'simulink_design_verifier', 'real-time_workshop'
+            % ''polyspace_client_c_cpp'
         example = {'matlab', 'optimization_toolbox', 'curve_fitting_toolbox'}
     end
     
