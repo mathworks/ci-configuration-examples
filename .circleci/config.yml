@@ -10,6 +10,7 @@ jobs:
       MW_DIAGNOSTIC_DEST: file
       MW_DIAGNOSTIC_SPEC: cppmicroservices::framework.*=all;install.*=all;
       MW_VERBOSE_HTTPCLIENT_CORE: 1
+      MW_BATCH_LICENSING_ONLINE: true  # testing online validation, can remove when this becomes the default
     steps:
       - checkout
       - matlab/install:
