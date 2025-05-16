@@ -13,6 +13,8 @@ We've got you covered!
 
 This repository makes it easy to run your MATLAB tests on some of the most common CI platforms. The configuration files take care of setting up MATLAB to work with the CI system and automatically executing your MATLAB tests.
 
+For advanced workflows, use the [`advanced-ci-configuration-examples`](https://github.com/mathworks/advanced-ci-configuration-examples) repository instead.
+
 <br>
 
 
