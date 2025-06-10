@@ -1,10 +1,48 @@
-name: Self-hosted Test
+name: MATLAB CI
 
-on: [push]
+# Ne zaman tetiklensin?
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  test-runner:
-    runs-on: self-hosted
+  build-and-test:
+    # Eğer kendi self-hosted runner'ınızda MATLAB yüklüyse:
+    runs-on: [ self-hosted, windows, x64 ]
+    # Yoksa MathWorks'ün bulut runner'larından da faydalanabilirsiniz:
+    # runs-on: ubuntu-latest
+
     steps:
-      - name: Print Hello
-        run: echo "Hello from Aylin's self-hosted runner!"
+      # 1. Kodu çek
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. (Opsiyonel) MATLAB'ı hazırla
+      # — MathWorks'ün resmi Action'ı kullanabilirsiniz:
+      - name: Setup MATLAB
+        uses: matlab-actions/setup-matlab@v1
+        with:
+          release: 'R2025a'    # kurulu MATLAB sürümünüz
+
+      # 3. Bağımlılık varsa yükle (örn. MATLAB Toolboxes, ek dosyalar...)
+
+      # 4. Projeyi derle ve test et
+      - name: Run buildfile.m
+        shell: bash -l {0}
+        run: matlab -batch "run('buildfile.m')"
+
+      # veya eğer Windows PowerShell kullanacaksanız:
+      # - name: Run buildfile.m on PowerShell
+      #   shell: pwsh
+      #   run: matlab -batch "run('buildfile.m')"
+
+      # 5. (Opsiyonel) Üretilen rapor, figür veya sonuç dosyalarını artefakt olarak sakla
+      - name: Upload logs and figures
+        uses: actions/upload-artifact@v3
+        with:
+          name: matlab-results
+          path: results/
+
+
