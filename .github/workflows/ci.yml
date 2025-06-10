@@ -1,6 +1,6 @@
-name: MATLAB CI
+# .github/workflows/ci-windows.yml
+name: Simple MATLAB CI on Windows
 
-# Ne zaman tetiklensin?
 on:
   push:
     branches: [ main ]
@@ -8,41 +8,29 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
-    # Eğer kendi self-hosted runner'ınızda MATLAB yüklüyse:
-    runs-on: [ self-hosted, windows, x64 ]
-    # Yoksa MathWorks'ün bulut runner'larından da faydalanabilirsiniz:
-    # runs-on: ubuntu-latest
+  matlab-test:
+    runs-on: windows-latest
 
     steps:
-      # 1. Kodu çek
-      - name: Checkout repository
+      # 1. Depoyu çek
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. (Opsiyonel) MATLAB'ı hazırla
-      # — MathWorks'ün resmi Action'ı kullanabilirsiniz:
-      - name: Setup MATLAB
-        uses: matlab-actions/setup-matlab@v1
-        with:
-          release: 'R2025a'    # kurulu MATLAB sürümünüz
+      # 2. MATLAB betiğini çalıştır
+      - name: Run MATLAB script
+        shell: pwsh
+        run: |
+          # Örnek: yalnızca Hello world
+          matlab -batch "disp('Hello from MATLAB on Windows CI'); exit"
+          # Veya gerçek işiniz için:
+          # matlab -batch "run('buildfile.m')"
 
-      # 3. Bağımlılık varsa yükle (örn. MATLAB Toolboxes, ek dosyalar...)
-
-      # 4. Projeyi derle ve test et
-      - name: Run buildfile.m
-        shell: bash -l {0}
-        run: matlab -batch "run('buildfile.m')"
-
-      # veya eğer Windows PowerShell kullanacaksanız:
-      # - name: Run buildfile.m on PowerShell
-      #   shell: pwsh
-      #   run: matlab -batch "run('buildfile.m')"
-
-      # 5. (Opsiyonel) Üretilen rapor, figür veya sonuç dosyalarını artefakt olarak sakla
-      - name: Upload logs and figures
+      # 3. (İsteğe bağlı) Üretilen dosyaları artefakt olarak yükle
+      - name: Upload results
+        if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: matlab-results
+          name: matlab-output
           path: results/
 
 
