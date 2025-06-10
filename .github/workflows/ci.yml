@@ -1,5 +1,5 @@
 # .github/workflows/ci-windows.yml
-name: Simple MATLAB CI on Windows
+name: MATLAB CI on Self-Hosted Windows
 
 on:
   push:
@@ -8,29 +8,24 @@ on:
     branches: [ main ]
 
 jobs:
-  matlab-test:
-    runs-on: windows-latest
+  matlab-build:
+    # Kendi self-hosted Windows runner'ınıza uygun etiketler
+    runs-on: [ self-hosted, windows, x64 ]
 
     steps:
-      # 1. Depoyu çek
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. MATLAB betiğini çalıştır
-      - name: Run MATLAB script
+      - name: Run MATLAB buildfile
         shell: pwsh
         run: |
-          # Örnek: yalnızca Hello world
-          matlab -batch "disp('Hello from MATLAB on Windows CI'); exit"
-          # Veya gerçek işiniz için:
-          # matlab -batch "run('buildfile.m')"
+          # Eğer buildfile.m yerine başka bir .m dosyanız varsa ismini değiştirin
+          matlab -batch "try, run('buildfile.m'); catch ME, disp(getReport(ME,'extended')); exit(1); end; exit(0)"
 
-      # 3. (İsteğe bağlı) Üretilen dosyaları artefakt olarak yükle
-      - name: Upload results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: matlab-output
-          path: results/
-
-
+      # ------- Eğer artefakt gerekirse bu adımı açın ve 'path:' değerini ayarlayın -------
+      #- name: Upload build artifacts
+      #  if: always()
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: matlab-artifacts
+      #    path: <ÇIKTI_KLASÖRÜ>/  # Örneğin: build/output/
