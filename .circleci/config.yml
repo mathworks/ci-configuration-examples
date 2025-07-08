@@ -31,6 +31,30 @@ jobs:
        MW_BATCH_LICENSING_ONLINE: true # testing online validation, can remove when this becomes the default
     steps:
       - checkout
+      # Use AWS-based Ubuntu mirror for better connectivity.
+      # See https://support.circleci.com/hc/en-us/articles/37474192881179-Resolving-Unable-to-connect-to-archive-ubuntu-com-403-Forbidden-Error-in-CircleCI
+      - when:
+          condition:
+            equal: ["<<parameters.os>>", "linux"]
+          steps:
+            - run:
+                name: Switch to AWS mirror
+                command: |
+                  sudo sed -i 's|http://archive.ubuntu.com|http://us-east-1.ec2.archive.ubuntu.com|g' /etc/apt/sources.list
+                  sudo sed -i 's|http://security.ubuntu.com|http://us-east-1.ec2.archive.ubuntu.com|g' /etc/apt/sources.list
+
+      # Make APT more robust to network connectivity issues.
+      - when:
+          condition:
+            equal: ["<<parameters.os>>", "linux"]
+          steps:
+            - run:
+                name: Configure APT behavior
+                command: |
+                  echo 'Acquire::ForceIPv4 "true";' | sudo tee /etc/apt/apt.conf.d/99force-ipv4
+                  echo 'Acquire::http::Timeout "30";' | sudo tee /etc/apt/apt.conf.d/99timeout
+                  echo 'Acquire::Retries "3";' | sudo tee /etc/apt/apt.conf.d/99retries
+                  echo 'Acquire::http::Pipeline-Depth "0";' | sudo tee /etc/apt/apt.conf.d/99pipeline
       - matlab/install:
           release: <<parameters.release>>
           products: Optimization_Toolbox Curve_Fitting_Toolbox
@@ -51,4 +75,4 @@ workflows:
          matrix:
            parameters:
               os: [linux, macos, windows]
-              release: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, R2024b, latest]
+              release: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, R2024b, R2025a, latest]
