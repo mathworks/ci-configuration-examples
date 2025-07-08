@@ -13,6 +13,13 @@ jobs:
       MW_BATCH_LICENSING_ONLINE: true  # testing online validation, can remove when this becomes the default
     steps:
       - checkout
+      # Use AWS-based Ubuntu mirror for better connectivity.
+      # See https://support.circleci.com/hc/en-us/articles/37474192881179-Resolving-Unable-to-connect-to-archive-ubuntu-com-403-Forbidden-Error-in-CircleCI
+      - run:
+          name: Switch to AWS mirror
+          command: |
+            sudo sed -i 's|http://archive.ubuntu.com|http://us-east-1.ec2.archive.ubuntu.com|g' /etc/apt/sources.list
+            sudo sed -i 's|http://security.ubuntu.com|http://us-east-1.ec2.archive.ubuntu.com|g' /etc/apt/sources.list
       - matlab/install:
           products: Optimization_Toolbox Curve_Fitting_Toolbox
       - matlab/run-tests:
