@@ -13,21 +13,11 @@ jobs:
       MW_BATCH_LICENSING_ONLINE: true  # testing online validation, can remove when this becomes the default
     steps:
       - checkout
-      # Use AWS-based Ubuntu mirror for better connectivity.
-      # See https://support.circleci.com/hc/en-us/articles/37474192881179-Resolving-Unable-to-connect-to-archive-ubuntu-com-403-Forbidden-Error-in-CircleCI
       - run:
-          name: Switch to AWS mirror
+          name: Remove problematic Launchpad PPAs
           command: |
-            sudo sed -i 's|http://archive.ubuntu.com|http://us-east-1.ec2.archive.ubuntu.com|g' /etc/apt/sources.list
-            sudo sed -i 's|http://security.ubuntu.com|http://us-east-1.ec2.archive.ubuntu.com|g' /etc/apt/sources.list
-      # Make APT more robust to network connectivity issues.
-      - run:
-          name: Configure APT behavior
-          command: |
-            echo 'Acquire::ForceIPv4 "true";' | sudo tee /etc/apt/apt.conf.d/99force-ipv4
-            echo 'Acquire::http::Timeout "30";' | sudo tee /etc/apt/apt.conf.d/99timeout
-            echo 'Acquire::Retries "3";' | sudo tee /etc/apt/apt.conf.d/99retries
-            echo 'Acquire::http::Pipeline-Depth "0";' | sudo tee /etc/apt/apt.conf.d/99pipeline
+            echo "Removing PPA sources from /etc/apt/sources.list.d"
+            sudo find /etc/apt/sources.list.d/ -type f -name '*.list' -exec grep -l 'ppa.launchpad' {} \; | xargs sudo rm -f
       - matlab/install:
           products: Optimization_Toolbox Curve_Fitting_Toolbox
       - matlab/run-tests:
