@@ -14,13 +14,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         release: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, R2024b, R2025a, latest, latest-including-prerelease]  
-        # exclude: # g3735302
-        #   - os: macos-latest
-        #     release: R2025a
-        #   - os: macos-latest
-        #     release: latest
-        #   - os: macos-latest
-        #     release: latest-including-prerelease
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
