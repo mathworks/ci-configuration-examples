@@ -61,11 +61,11 @@ workflows:
            parameters:
               os: [linux, macos, windows]
               release: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, R2024b, R2025a, latest, latest-including-prerelease]
-           # g3735302
-           exclude:
-             - os: macos
-               release: R2025a
-             - os: macos
-               release: latest
-             - os: macos
-               release: latest-including-prerelease
+           # # g3735302
+           # exclude:
+           #   - os: macos
+           #     release: R2025a
+           #   - os: macos
+           #     release: latest
+           #   - os: macos
+           #     release: latest-including-prerelease
