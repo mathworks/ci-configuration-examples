@@ -2,4 +2,4 @@ jobs:
   - template: azure-pipelines-template.yml
     parameters:
       IMAGE: [windows-latest, ubuntu-latest, macOS-latest]
-      RELEASE: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, R2024b, R2025a, latest]
+      RELEASE: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, R2024b, R2025a, latest, latest-including-prerelease]
