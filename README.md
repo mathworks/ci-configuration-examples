@@ -309,7 +309,7 @@ To license products that are not automatically licensed, you can request a [MATL
 
 
 ## Feedback and Support
-If you encounter a product licensing issue, consider requesting a MATLAB batch licensing token to use in your workflow. For more information, see [Licensing](#licensing).
+If you encounter a product licensing issue, consider requesting a MATLAB batch licensing token to use in your pipeline. For more information, see [Licensing](#licensing).
 
 If you have an enhancement request or other feedback, create an issue on the [Issues](https://github.com/mathworks/ci-configuration-examples/issues) page.
 
