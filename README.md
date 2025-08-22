@@ -291,7 +291,7 @@ matlab-test:
 
 
 ## Licensing
-When you use a cloud-hosted agent, product licensing for your pipeline depends on your project visibility as well as the types of products the pipeline uses:
+Product licensing for your pipeline depends on your project visibility as well as the types of products the pipeline uses:
 
 - Public project — MathWorks&reg; automatically licenses all products for you, except for transformation products, such as MATLAB Coder&trade; and MATLAB Compiler&trade;.
 - Private project — MathWorks does not automatically license any products for you. 
