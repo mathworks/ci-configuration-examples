@@ -20,12 +20,11 @@ jobs:
           - task: RunMATLABTests@1
             inputs:
               sourceFolder: code
-          - script: |
+          - bash: |
               mkdir -p $(Build.ArtifactStagingDirectory)/mw_logs
               cp -r $(MATLAB_LOG_DIR)/* $(Build.ArtifactStagingDirectory)/mw_logs/ || true
               cp -v /tmp/mathworks_*.log $(Build.ArtifactStagingDirectory)/mw_logs/ || true
             condition: failed()
-            shell: bash
             displayName: Gather MPM and MATLAB logs
           - task: PublishBuildArtifacts@1
             condition: failed()
