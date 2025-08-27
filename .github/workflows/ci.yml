@@ -39,6 +39,13 @@ jobs:
         uses: matlab-actions/run-tests@v2
         with:
           source-folder: code
+
+      - name: Export TEMP and TMPDIR env vars for artifact upload
+        if: ${{ failure() }}
+        run: |
+          echo "TEMP=$TEMP" >> $GITHUB_ENV
+          echo "TMPDIR=$TMPDIR" >> $GITHUB_ENV
+        shell: bash
         
       - name: Upload MPM and MATLAB logs
         if: ${{ failure() }}
@@ -47,8 +54,8 @@ jobs:
           name: mw-logs-${{ github.job }}-${{ matrix.os }}
           path: |
             ${{ env.MATLAB_LOG_DIR }}
-            $TEMP/mathworks_*.log
-            $TMPDIR/mathworks_*.log
+            ${{ env.TEMP }}/mathworks_*.log
+            ${{ env.TMPDIR }}/mathworks_*.log
             /tmp/mathworks_*.log
           if-no-files-found: ignore
 
