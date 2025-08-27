@@ -24,7 +24,8 @@ jobs:
         type: string
     executor: <<parameters.os>>
     environment:
-       MATLAB_LOG_DIR: /home/circleci/project/logs
+       MATLAB_LOG_DIR: /home/circleci/project/mw_logs
+       MW_INSTALLER_DDUX_LOG: /home/circleci/project/mw_logs/mw_installer_ddux.log
        MW_DIAGNOSTIC_DEST: file
        MW_DIAGNOSTIC_SPEC: cppmicroservices::framework.*=all;install.*=all;
        MW_VERBOSE_HTTPCLIENT_CORE: 1
@@ -46,11 +47,11 @@ jobs:
       - matlab/run-tests:
           source-folder: code
       - run:
-          command: tar -cvzf matlab-logs.tar /home/circleci/project/logs
+          command: tar --ignore-failed-read -cvzf mw-logs.tar /home/circleci/project/mw_logs "$TEMP"/mathworks_*.log "$TMPDIR"/mathworks_*.log /tmp/mathworks_*.log
           when: on_fail
           shell: bash
       - store_artifacts:
-          path: matlab-logs.tar
+          path: mw-logs.tar
           when: on_fail
 
 workflows:
