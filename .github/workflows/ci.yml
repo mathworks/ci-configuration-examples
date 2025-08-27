@@ -72,6 +72,20 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Enable core dumps (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gdb
+          ulimit -c unlimited
+          echo '/tmp/core.%e.%p' | sudo tee /proc/sys/kernel/core_pattern
+
+      - name: Enable core dumps (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          ulimit -c unlimited
+          sudo sysctl -w kern.coredump=1
+
       # Sets up MATLAB on the GitHub Actions runner
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
@@ -83,6 +97,26 @@ jobs:
         uses: matlab-actions/run-tests@v2
         with:
           source-folder: code
+
+      - name: Analyze core dumps (Linux)
+        if: failure() && runner.os == 'Linux'
+        run: |
+          for core in /tmp/core.mpm.*; do
+            if [ -f "$core" ]; then
+              echo "Core dump found: $core"
+              gdb -batch -ex "thread apply all bt" "$RUNNER_TEMP/mpm" "$core" > "${core}.stacktrace.txt" || true
+            fi
+          done
+
+      - name: Analyze core dumps (macOS)
+        if: failure() && runner.os == 'macOS'
+        run: |
+          for core in /cores/core.*; do
+            if [ -f "$core" ]; then
+              echo "Core dump found: $core"
+              lldb --batch -o "target create \"$RUNNER_TEMP/mpm\"" -o "core load $core" -o "bt all" -o "quit" > "${core}.stacktrace.txt" || true
+            fi
+          done
 
       - name: Export TEMP and TMPDIR env vars for artifact upload
         if: ${{ failure() }}
@@ -101,6 +135,10 @@ jobs:
             ${{ env.TEMP }}/mathworks_*.log
             ${{ env.TMPDIR }}/mathworks_*.log
             /tmp/mathworks_*.log
+            /tmp/core.mpm.*.stacktrace.txt
+            /cores/core.*.stacktrace.txt
+            /tmp/core.mpm.*
+            /cores/core.*
           if-no-files-found: ignore
 
       - name: Send mail
@@ -126,13 +164,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
 
-    env:
-      MATLAB_LOG_DIR: ${{ github.workspace }}/mw_logs
-      MW_INSTALLER_DDUX_LOG: ${{ github.workspace }}/mw_logs/mw_installer_ddux.log
-      MW_DIAGNOSTIC_DEST: file
-      MW_DIAGNOSTIC_SPEC: cppmicroservices::framework.*=all;install.*=all;
-      MW_VERBOSE_HTTPCLIENT_CORE: 1
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -151,25 +182,6 @@ jobs:
         uses: matlab-actions/run-tests@v2
         with:
           source-folder: code
-
-      - name: Export TEMP and TMPDIR env vars for artifact upload
-        if: ${{ failure() }}
-        run: |
-          echo "TEMP=$TEMP" >> $GITHUB_ENV
-          echo "TMPDIR=$TMPDIR" >> $GITHUB_ENV
-        shell: bash
-
-      - name: Upload MPM and MATLAB logs
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: mw-logs-${{ github.job }}-${{ matrix.os }}
-          path: |
-            ${{ env.MATLAB_LOG_DIR }}
-            ${{ env.TEMP }}/mathworks_*.log
-            ${{ env.TMPDIR }}/mathworks_*.log
-            /tmp/mathworks_*.log
-          if-no-files-found: ignore
 
       - name: Send mail
         if: ${{ failure() }}
