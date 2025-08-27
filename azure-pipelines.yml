@@ -1,7 +1,8 @@
 pool:
   vmImage: ubuntu-latest
 variables:
-  MATLAB_LOG_DIR: $(Build.SourcesDirectory)/logs
+  MATLAB_LOG_DIR: $(Build.SourcesDirectory)/mw_logs
+  MW_INSTALLER_DDUX_LOG: $(Build.SourcesDirectory)/mw_logs/mw_installer_ddux.log
   MW_DIAGNOSTIC_DEST: file
   MW_DIAGNOSTIC_SPEC: cppmicroservices::framework.*=all;install.*=all;
   MW_VERBOSE_HTTPCLIENT_CORE: 1
@@ -26,11 +27,17 @@ steps:
       codeCoverageTool: Cobertura
       summaryFileLocation: code-coverage/coverage.xml
       pathToSources: code/
+  - bash: |
+      mkdir -p $(Build.ArtifactStagingDirectory)/mw_logs
+      cp -r $(MATLAB_LOG_DIR)/* $(Build.ArtifactStagingDirectory)/mw_logs/ || true
+      cp -v /tmp/mathworks_*.log $(Build.ArtifactStagingDirectory)/mw_logs/ || true
+    condition: failed()
+    displayName: Gather MPM and MATLAB logs
   - task: PublishBuildArtifacts@1
     condition: failed()
     inputs:
-      PathtoPublish: $(MATLAB_LOG_DIR)
-      ArtifactName: matlab-logs
+      PathtoPublish: $(Build.ArtifactStagingDirectory)/mw_logs
+      ArtifactName: mw-logs
     displayName: Publish MPM and MATLAB logs
 
   # As an alternative to RunMATLABTests, you can use RunMATLABCommand to execute a MATLAB script, function, or statement.

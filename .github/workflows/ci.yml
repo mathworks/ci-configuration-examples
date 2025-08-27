@@ -60,7 +60,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     
     env:
-      MATLAB_LOG_DIR: ${{ github.workspace }}/logs
+      MATLAB_LOG_DIR: ${{ github.workspace }}/mw_logs
+      MW_INSTALLER_DDUX_LOG: ${{ github.workspace }}/mw_logs/mw_installer_ddux.log
       MW_DIAGNOSTIC_DEST: file
       MW_DIAGNOSTIC_SPEC: cppmicroservices::framework.*=all;install.*=all;
       MW_VERBOSE_HTTPCLIENT_CORE: 1
@@ -83,12 +84,23 @@ jobs:
         with:
           source-folder: code
 
+      - name: Export TEMP and TMPDIR env vars for artifact upload
+        if: ${{ failure() }}
+        run: |
+          echo "TEMP=$TEMP" >> $GITHUB_ENV
+          echo "TMPDIR=$TMPDIR" >> $GITHUB_ENV
+        shell: bash
+
       - name: Upload MPM and MATLAB logs
         if: ${{ failure() }}
         uses: actions/upload-artifact@v4
         with:
-          name: matlab-logs-${{ github.job }}-${{ matrix.os }}
-          path: ${{ env.MATLAB_LOG_DIR }}
+          name: mw-logs-${{ github.job }}-${{ matrix.os }}
+          path: |
+            ${{ env.MATLAB_LOG_DIR }}
+            ${{ env.TEMP }}/mathworks_*.log
+            ${{ env.TMPDIR }}/mathworks_*.log
+            /tmp/mathworks_*.log
           if-no-files-found: ignore
 
       - name: Send mail
@@ -115,7 +127,8 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      MATLAB_LOG_DIR: ${{ github.workspace }}/logs
+      MATLAB_LOG_DIR: ${{ github.workspace }}/mw_logs
+      MW_INSTALLER_DDUX_LOG: ${{ github.workspace }}/mw_logs/mw_installer_ddux.log
       MW_DIAGNOSTIC_DEST: file
       MW_DIAGNOSTIC_SPEC: cppmicroservices::framework.*=all;install.*=all;
       MW_VERBOSE_HTTPCLIENT_CORE: 1
@@ -139,12 +152,23 @@ jobs:
         with:
           source-folder: code
 
+      - name: Export TEMP and TMPDIR env vars for artifact upload
+        if: ${{ failure() }}
+        run: |
+          echo "TEMP=$TEMP" >> $GITHUB_ENV
+          echo "TMPDIR=$TMPDIR" >> $GITHUB_ENV
+        shell: bash
+
       - name: Upload MPM and MATLAB logs
         if: ${{ failure() }}
         uses: actions/upload-artifact@v4
         with:
-          name: matlab-logs-${{ github.job }}-${{ matrix.os }}
-          path: ${{ env.MATLAB_LOG_DIR }}
+          name: mw-logs-${{ github.job }}-${{ matrix.os }}
+          path: |
+            ${{ env.MATLAB_LOG_DIR }}
+            ${{ env.TEMP }}/mathworks_*.log
+            ${{ env.TMPDIR }}/mathworks_*.log
+            /tmp/mathworks_*.log
           if-no-files-found: ignore
 
       - name: Send mail
