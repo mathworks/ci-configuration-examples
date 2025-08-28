@@ -47,7 +47,7 @@ jobs:
       - matlab/run-tests:
           source-folder: code
       - run:
-          command: tar --ignore-failed-read -cvzf mw-logs.tar /home/circleci/project/mw_logs "$TEMP"/mathworks_*.log "$TMPDIR"/mathworks_*.log /tmp/mathworks_*.log
+          command: tar -cvzf mw-logs.tar /home/circleci/project/mw_logs "$TEMP"/mathworks_*.log "$TMPDIR"/mathworks_*.log /tmp/mathworks_*.log || true
           when: on_fail
           shell: bash
       - store_artifacts:
