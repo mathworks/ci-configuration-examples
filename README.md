@@ -290,8 +290,13 @@ matlab-test:
 <br>
 
 
-## Caveats
-* On cloud-hosted agents provided by Azure DevOps, CircleCI, and GitHub Actions, you need a [MATLAB batch licensing token](https://github.com/mathworks-ref-arch/matlab-dockerfile/blob/main/alternates/non-interactive/MATLAB-BATCH.md#matlab-batch-licensing-token) if your project is private or if your pipeline includes transformation products, such as MATLAB Coder&trade; and MATLAB Compiler&trade;. You can request a token by contacting MathWorks&reg; at [batch-tokens@mathworks.com](mailto:batch-tokens@mathworks.com).
+## Licensing
+Product licensing for your pipeline depends on your project visibility as well as the types of products the pipeline uses:
+
+- Public project — The CI integration for MATLAB automatically licenses all products for you, except for transformation products, such as MATLAB Coder&trade; and MATLAB Compiler&trade;.
+- Private project — The CI integration does not automatically license any products for you. 
+
+To license products that are not automatically licensed, you can request a [MATLAB batch licensing token](https://github.com/mathworks-ref-arch/matlab-dockerfile/blob/main/alternates/non-interactive/MATLAB-BATCH.md#matlab-batch-licensing-token) by submitting the [MATLAB Batch Licensing Pilot](https://www.mathworks.com/support/batch-tokens.html) form. Batch licensing tokens are strings that enable MATLAB to start in noninteractive environments.
 
 <br>
 
@@ -303,5 +308,9 @@ matlab-test:
 <br>
 
 
-## Contact Us
-If you have any questions or suggestions, please contact MathWorks at [continuous-integration@mathworks.com](mailto:continuous-integration@mathworks.com).
+## Feedback and Support
+If you encounter a product licensing issue, consider requesting a MATLAB batch licensing token to use in your pipeline. For more information, see [Licensing](#licensing).
+
+If you have an enhancement request or other feedback, create an issue on the [Issues](https://github.com/mathworks/ci-configuration-examples/issues) page.
+
+For support, contact [MathWorks Technical Support](https://www.mathworks.com/support/contact_us.html).
