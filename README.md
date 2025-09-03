@@ -293,10 +293,10 @@ matlab-test:
 ## Licensing
 Product licensing for your pipeline depends on your project visibility as well as the types of products the pipeline uses:
 
-- Public project — MathWorks&reg; automatically licenses all products for you, except for transformation products, such as MATLAB Coder&trade; and MATLAB Compiler&trade;.
-- Private project — MathWorks does not automatically license any products for you. 
+- Public project — The CI integration for MATLAB automatically licenses all products for you, except for transformation products, such as MATLAB Coder&trade; and MATLAB Compiler&trade;.
+- Private project — The CI integration does not automatically license any products for you. 
 
-To license products that are not automatically licensed, you can request a [MATLAB batch licensing token](https://github.com/mathworks-ref-arch/matlab-dockerfile/blob/main/alternates/non-interactive/MATLAB-BATCH.md#matlab-batch-licensing-token) by submitting the [MATLAB Batch Licensing Pilot](https://www.mathworks.com/support/batch-tokens.html) form. Batch licensing tokens are strings that enable MATLAB to start in noninteractive environments
+To license products that are not automatically licensed, you can request a [MATLAB batch licensing token](https://github.com/mathworks-ref-arch/matlab-dockerfile/blob/main/alternates/non-interactive/MATLAB-BATCH.md#matlab-batch-licensing-token) by submitting the [MATLAB Batch Licensing Pilot](https://www.mathworks.com/support/batch-tokens.html) form. Batch licensing tokens are strings that enable MATLAB to start in noninteractive environments.
 
 <br>
 
