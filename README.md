@@ -63,7 +63,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 |:------------------|:-|
 | Badge | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://circleci.com/gh/mathworks/ci-configuration-examples) |
 | Badge Code | \[\!\[CircleCI](https[]()://circleci.com/***SOURCE_CONTROL_SYSTEM***/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***.svg?style=svg)](https[]()://circleci.com/***SOURCE_CONTROL_SYSTEM***/***GITHUB_USERNAME***/***GITHUB_REPO_NAME***) |
-| Badge Help | [CircleCI documentation for setting up badges](https://circleci.com/docs/2.0/status-badges "CircleCI documentation for setting up badges") |
+| Badge Help | [CircleCI documentation for setting up badges](https://circleci.com/docs/guides/integration/status-badges/) |
 
 <br>
 
