@@ -1,6 +1,6 @@
-| **Azure<sup>&reg;</sup>&nbsp;DevOps** | **CircleCI<sup>&reg;</sup>** | **GitHub<sup>&reg;</sup>&nbsp;Actions** | 
-|:---------------------------|:-----------------:|:----------------------------:|
-| [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/38) | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://app.circleci.com/pipelines/github/mathworks/ci-configuration-examples) <br><br> | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) <br><br> |
+| **Azure<sup>&reg;</sup>&nbsp;DevOps** | **CircleCI<sup>&reg;</sup>** | **GitHub<sup>&reg;</sup>&nbsp;Actions** |  **GitLab<sup>&reg;</sup>&nbsp;CI/CD** | 
+|:---------------------------|:-----------------:|:----------------------------:|:--------------------------:|
+| [![Build Status](https://dev.azure.com/iat-ci/ci-configuration-examples/_apis/build/status/mathworks.ci-configuration-examples)](https://dev.azure.com/iat-ci/ci-configuration-examples/_build) <br> ![Azure DevOps Coverage](https://img.shields.io/azure-devops/coverage/iat-ci/ci-configuration-examples/38) | [![CircleCI](https://circleci.com/gh/mathworks/ci-configuration-examples.svg?style=svg)](https://app.circleci.com/pipelines/github/mathworks/ci-configuration-examples) <br><br> | [![MATLAB](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/mathworks/ci-configuration-examples/actions/workflows/ci.yml) <br><br> | [![GitLab CI/CD](https://gitlab.com/mathworks/ci-configuration-examples/badges/main/pipeline.svg)](https://gitlab.com/mathworks/ci-configuration-examples/-/pipelines) <br><br> |
 
 
 # Continuous Integration (CI) configuration examples for MATLAB<sup>&reg;</sup>
@@ -77,6 +77,7 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 
 | **GitLab&nbsp;CI/CD** |  |
 |:--------------------------|:-|
+| Badge | [![GitLab CI/CD](https://gitlab.com/mathworks/ci-configuration-examples/badges/main/pipeline.svg)](https://gitlab.com/mathworks/ci-configuration-examples/-/pipelines) |
 | Badge Code | \[\!\[Pipeline Status](https[]()://gitlab.com/***GITLAB_PROJECT_PATH***/badges/***DEFAULT_BRANCH_NAME***/pipeline.svg)](https[]()://gitlab.com/***GITLAB_PROJECT_PATH***) |
 | Badge Help | [GitLab CI/CD documentation for setting up badges](https://docs.gitlab.com/ee/user/project/badges.html "GitLab CI/CD documentation for setting up badges") |
 
@@ -117,15 +118,6 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 ## About the code
 The primary goal of this repository is to provide a set of configuration files as templates that illustrate how to run MATLAB on various CI platforms (e.g., Azure DevOps, CircleCI, GitHub Actions, Jenkins).
 
-Each of these pipeline definitions does four things:
-
-1. Install the latest MATLAB release on a Linux<sup>&reg;</sup>-based build agent
-2. Run all MATLAB tests in the root of your repository, including its subfolders
-3. Produce a test results report (if necessary)
-4. Produce a code coverage report in Cobertura XML format for the source folder
-   * Currently, only Azure DevOps supports code coverage directly
-   * To see an example of using [Codecov](https://about.codecov.io/) to show coverage results, please refer to [https://github.com/mathworks/matlab-codecov-example](https://github.com/mathworks/matlab-codecov-example)
-
 The example MATLAB code example `dayofyear.m` is a simple function takes a date string `"mm/dd/yyyy"` and returns the day-of-year number.
 
 Notes:
@@ -143,150 +135,12 @@ The repository includes these files:
 | [`code/dayofyear.m`](code/dayofyear.m) | The [`dayofyear`](code/dayofyear.m) function returns the day-of-year number for a given date string "mm/dd/yyyy" |
 | [`tests/TestExamples.m`](tests/TestExamples.m) | The [`TestExamples`](tests/TestExamples.m) class provides a few equality and negative tests for the [`dayofyear`](code/dayofyear.m) function |
 | [`tests/ParameterizedTestExample.m`](tests/ParameterizedTestExample.m) | The [`ParameterizedTestExample`](tests/ParameterizedTestExample.m) class provides 12 tests for the [`dayofyear`](code/dayofyear.m) function using the parameterized test format |
-| [`azure-pipelines.yml`](###Azure-DevOps) | The [`azure-pipelines.yml`](azure-pipelines.yml) file defines the pipeline that runs on [Azure DevOps](https://marketplace.visualstudio.com/items?itemName=MathWorks.matlab-azure-devops-extension). |
-| [`.circleci/config.yml`](###CircleCI) | The [`config.yml`](.circleci/config.yml) file defines the pipeline that runs on [CircleCI](https://circleci.com/orbs/registry/orb/mathworks/matlab) |
-| [`.github/workflows/ci.yml`](###GitHub-Actions) | The [`ci.yml`](.github/workflows/ci.yml) file defines the pipeline that runs on [GitHub Actions](https://github.com/matlab-actions/overview) |
-| [`Jenkinsfile`](###Jenkins) | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs on [Jenkins](https://plugins.jenkins.io/matlab/) |
-| [`.gitlab-ci.yml`](###GitLab-CI/CD) | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs on [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) |
+| [`azure-pipelines.yml`](azure-pipelines.yml) | The [`azure-pipelines.yml`](azure-pipelines.yml) file defines the pipeline that runs on [Azure DevOps](https://marketplace.visualstudio.com/items?itemName=MathWorks.matlab-azure-devops-extension). |
+| [`.circleci/config.yml`](.circleci/config.yml) | The [`config.yml`](.circleci/config.yml) file defines the pipeline that runs on [CircleCI](https://circleci.com/orbs/registry/orb/mathworks/matlab) |
+| [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | The [`ci.yml`](.github/workflows/ci.yml) file defines the pipeline that runs on [GitHub Actions](https://github.com/matlab-actions/overview) |
+| [`Jenkinsfile`](Jenkinsfile) | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs on [Jenkins](https://plugins.jenkins.io/matlab/) |
+| [`.gitlab-ci.yml`](.gitlab-ci.yml) | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs on [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) |
 
-<br>
-
-
-## CI configuration files
-
-### Azure DevOps
-```yml
-pool:
-  vmImage: ubuntu-latest
-steps:
-  - task: InstallMATLAB@1
-  - task: RunMATLABTests@1
-    inputs:
-      sourceFolder: code
-      codeCoverageCobertura: code-coverage/coverage.xml
-      testResultsJUnit: test-results/results.xml
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFormat: 'JUnit'
-      testResultsFiles: 'test-results/results.xml'
-  - task: PublishCodeCoverageResults@1
-    inputs:
-      codeCoverageTool: 'Cobertura'
-      summaryFileLocation: 'code-coverage/coverage.xml'
-      pathToSources: 'code/'
-
-  # As an alternative to RunMATLABTests, you can use RunMATLABCommand to execute a MATLAB script, function, or statement.
-  # - task: RunMATLABCommand@1
-  #   inputs:
-  #     command: addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
-```
-
-<br>
-
-### CircleCI
-```yml
-version: 2.1
-orbs:
-  matlab: mathworks/matlab@1
-jobs:
-  build:
-    machine:
-      image: ubuntu-2204:current
-    steps:
-      - checkout
-      - matlab/install
-      - matlab/run-tests:
-          source-folder: code
-
-      # As an alternative to run-tests, you can use run-command to execute a MATLAB script, function, or statement.
-      # - matlab/run-command:
-      #     command: addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
-```
-
-<br>
-
-### GitHub Actions
-```yml
-# This is a basic workflow to help you get started with MATLAB Actions
-
-name: MATLAB Build
-
-# Controls when the action will run. 
-on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-      
-      # Sets up MATLAB on a GitHub-hosted runner
-      - name: Set up MATLAB
-        uses: matlab-actions/setup-matlab@v2
-
-      # Runs a set of commands using the runners shell
-      - name: Run all tests
-        uses: matlab-actions/run-tests@v2
-        with:
-          source-folder: code
-
-      # You can use "run-build" to invoke the MATLAB build tool and run build tasks
-      #- name: Run the default "test" task in the build file
-      #   uses: matlab-actions/run-build@v2
-
-      # You can use "run-command" to execute custom MATLAB scripts, functions, or statements
-      #- name: Run custom testing procedure
-      #  uses: matlab-actions/run-command@v2
-      #  with:
-      #    command: disp('Running my custom testing procedure!'); addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);
-```
-
-<br>
-
-### Jenkins
-```groovy
-pipeline {
-  agent any
-  stages {
-    stage('Run MATLAB Tests') {
-      steps {
-        runMATLABTests(
-          sourceFolder: 'code'
-        )
-
-        // As an alternative to runMATLABTests, you can use runMATLABCommand to execute a MATLAB script, function, or statement.
-        // runMATLABCommand "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
-      }
-    }
-  }
-}
-```
-
-<br>
-
-### GitLab CI/CD
-```yml
-stages:         
-  - matlab-test
-
-matlab-test:       
-  stage: matlab-test
-  script:
-    - matlab -batch "addpath('code'); results = runtests('IncludeSubfolders', true); assertSuccess(results);"
-```
 <br>
 
 
