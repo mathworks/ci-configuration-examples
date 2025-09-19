@@ -106,11 +106,11 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 
 
 ## Supported CI platforms
-* Azure DevOps
-* CircleCI
-* GitHub Actions
-* Jenkins&trade;
-* GitLab CI/CD
+* Azure&reg; DevOps
+* CircleCI&reg;
+* GitHub&reg; Actions
+* Jenkins&reg;
+* GitLab&reg; CI/CD
 
 <br>
 
