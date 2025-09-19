@@ -118,15 +118,6 @@ Badges look really great, but they're not always easy to set up. Take a look at 
 ## About the code
 The primary goal of this repository is to provide a set of configuration files as templates that illustrate how to run MATLAB on various CI platforms (e.g., Azure DevOps, CircleCI, GitHub Actions, Jenkins).
 
-Each of these pipeline definitions does four things:
-
-1. Install the latest MATLAB release on a Linux<sup>&reg;</sup>-based build agent
-2. Run all MATLAB tests in the root of your repository, including its subfolders
-3. Produce a test results report (if necessary)
-4. Produce a code coverage report in Cobertura XML format for the source folder
-   * Currently, only Azure DevOps supports code coverage directly
-   * To see an example of using [Codecov](https://about.codecov.io/) to show coverage results, please refer to [https://github.com/mathworks/matlab-codecov-example](https://github.com/mathworks/matlab-codecov-example)
-
 The example MATLAB code example `dayofyear.m` is a simple function takes a date string `"mm/dd/yyyy"` and returns the day-of-year number.
 
 Notes:
