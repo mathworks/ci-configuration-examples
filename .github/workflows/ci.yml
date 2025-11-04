@@ -54,7 +54,7 @@ jobs:
     strategy:
       matrix:
         # Run this workflow on different os
-        os: [windows-latest, ubuntu-latest, macos-latest, macos-13]
+        os: [windows-latest, ubuntu-latest, macos-latest]
       fail-fast: false
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
@@ -121,7 +121,7 @@ jobs:
     strategy:
       matrix:
         # Run this workflow on different os
-        os: [windows-latest, ubuntu-latest, macos-latest, macos-13]
+        os: [windows-latest, ubuntu-latest, macos-latest]
       fail-fast: false
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
