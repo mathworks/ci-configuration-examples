@@ -1,3 +1,16 @@
+parameters:
+- name: IMAGE
+  type: object
+  default: []    # e.g., ['windows-latest', 'ubuntu-latest', 'macOS-latest']
+
+- name: RELEASE
+  type: object
+  default: []    # e.g., ['R2021a', 'R2021b', ..., 'latest-including-prerelease']
+
+- name: EXCLUDED
+  type: object
+  default: []    # e.g., ['macOS-latest|latest-including-prerelease']
+
 jobs:
   - ${{ each image in parameters.IMAGE }}:
     - ${{ each release in parameters.RELEASE }}:
