@@ -8,13 +8,13 @@ parameters:
   default: []    # e.g., ['R2021a', 'R2021b', ..., 'latest-including-prerelease']
 
 - name: EXCLUDED
-  type: object
-  default: []    # e.g., ['macOS-latest|latest-including-prerelease']
+  type: string
+  default: ''    # e.g., 'macOS-latest|latest-including-prerelease'
 
 jobs:
   - ${{ each image in parameters.IMAGE }}:
     - ${{ each release in parameters.RELEASE }}:
-      - ${{ if not(contains(parameters.EXCLUDED, format('{0}|{1}', image, release))) }}:
+      - ${{ if not(eq(format('{0}|{1}', image, release), parameters.EXCLUDED)) }}:
         - job:
           displayName: ${{ format('{0} {1}', image, release) }}
           pool:
