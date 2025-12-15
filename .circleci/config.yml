@@ -10,8 +10,8 @@ executors:
       image: ubuntu-2204:current
   macos:
     macos:
-      xcode: 14.2.0
-    resource_class: macos.m1.medium.gen1
+      xcode: 26.2.0
+    resource_class: m4pro.medium
   windows: 
     win/default
 
