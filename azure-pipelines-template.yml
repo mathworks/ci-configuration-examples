@@ -1,34 +1,35 @@
 jobs:
   - ${{ each image in parameters.IMAGE }}:
     - ${{ each release in parameters.RELEASE }}:
-      - job:
-        displayName: ${{ format('{0} {1}', image, release) }}
-        pool:
-          vmImage: ${{ image }}
-        variables:
-          MATLAB_LOG_DIR: $(Build.SourcesDirectory)/mw_logs
-          MW_INSTALLER_DDUX_LOG: $(Build.SourcesDirectory)/mw_logs/mw_installer_ddux.log
-          MW_DIAGNOSTIC_DEST: file
-          MW_DIAGNOSTIC_SPEC: cppmicroservices::framework.*=all;install.*=all;
-          MW_VERBOSE_HTTPCLIENT_CORE: 1
-          MW_BATCH_LICENSING_ONLINE: true # testing online validation, can remove when this becomes the default
-        steps:
-          - task: InstallMATLAB@1
-            inputs:
-              release: ${{ release }}
-              products: Optimization_Toolbox Curve_Fitting_Toolbox
-          - task: RunMATLABTests@1
-            inputs:
-              sourceFolder: code
-          - bash: |
-              mkdir -p $(Build.ArtifactStagingDirectory)/mw_logs
-              cp -r $(MATLAB_LOG_DIR)/* $(Build.ArtifactStagingDirectory)/mw_logs/ || true
-              cp -v /tmp/mathworks_*.log $(Build.ArtifactStagingDirectory)/mw_logs/ || true
-            condition: failed()
-            displayName: Gather MPM and MATLAB logs
-          - task: PublishBuildArtifacts@1
-            condition: failed()
-            inputs:
-              PathtoPublish: $(Build.ArtifactStagingDirectory)/mw_logs
-              ArtifactName: mw-logs
-            displayName: Publish MPM and MATLAB logs
+      - ${{ if not(contains(parameters.EXCLUDED, format('{0}|{1}', image, release))) }}:
+        - job:
+          displayName: ${{ format('{0} {1}', image, release) }}
+          pool:
+            vmImage: ${{ image }}
+          variables:
+            MATLAB_LOG_DIR: $(Build.SourcesDirectory)/mw_logs
+            MW_INSTALLER_DDUX_LOG: $(Build.SourcesDirectory)/mw_logs/mw_installer_ddux.log
+            MW_DIAGNOSTIC_DEST: file
+            MW_DIAGNOSTIC_SPEC: cppmicroservices::framework.*=all;install.*=all;
+            MW_VERBOSE_HTTPCLIENT_CORE: 1
+            MW_BATCH_LICENSING_ONLINE: true # testing online validation, can remove when this becomes the default
+          steps:
+            - task: InstallMATLAB@1
+              inputs:
+                release: ${{ release }}
+                products: Optimization_Toolbox Curve_Fitting_Toolbox
+            - task: RunMATLABTests@1
+              inputs:
+                sourceFolder: code
+            - bash: |
+                mkdir -p $(Build.ArtifactStagingDirectory)/mw_logs
+                cp -r $(MATLAB_LOG_DIR)/* $(Build.ArtifactStagingDirectory)/mw_logs/ || true
+                cp -v /tmp/mathworks_*.log $(Build.ArtifactStagingDirectory)/mw_logs/ || true
+              condition: failed()
+              displayName: Gather MPM and MATLAB logs
+            - task: PublishBuildArtifacts@1
+              condition: failed()
+              inputs:
+                PathtoPublish: $(Build.ArtifactStagingDirectory)/mw_logs
+                ArtifactName: mw-logs
+              displayName: Publish MPM and MATLAB logs
