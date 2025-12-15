@@ -3,4 +3,4 @@ jobs:
     parameters:
       IMAGE: [windows-latest, ubuntu-latest, macOS-latest]
       RELEASE: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, R2024b, R2025a, latest, latest-including-prerelease]
-      EXCLUDED: [macOS-latest|latest-including-prerelease] # R2026a no longer supports Intel Macs but Azure does not yet have ARM Macs
+      EXCLUDED: ['macOS-latest|latest-including-prerelease'] # R2026a no longer supports Intel Macs but Azure does not yet have ARM Macs
