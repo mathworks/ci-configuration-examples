@@ -135,11 +135,11 @@ The repository includes these files:
 | [`code/dayofyear.m`](code/dayofyear.m) | The [`dayofyear`](code/dayofyear.m) function returns the day-of-year number for a given date string "mm/dd/yyyy" |
 | [`tests/TestExamples.m`](tests/TestExamples.m) | The [`TestExamples`](tests/TestExamples.m) class provides a few equality and negative tests for the [`dayofyear`](code/dayofyear.m) function |
 | [`tests/ParameterizedTestExample.m`](tests/ParameterizedTestExample.m) | The [`ParameterizedTestExample`](tests/ParameterizedTestExample.m) class provides 12 tests for the [`dayofyear`](code/dayofyear.m) function using the parameterized test format |
-| [`azure-pipelines.yml`](azure-pipelines.yml) | The [`azure-pipelines.yml`](azure-pipelines.yml) file defines the pipeline that runs on [Azure DevOps](https://marketplace.visualstudio.com/items?itemName=MathWorks.matlab-azure-devops-extension). |
-| [`.circleci/config.yml`](.circleci/config.yml) | The [`config.yml`](.circleci/config.yml) file defines the pipeline that runs on [CircleCI](https://circleci.com/orbs/registry/orb/mathworks/matlab) |
-| [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | The [`ci.yml`](.github/workflows/ci.yml) file defines the pipeline that runs on [GitHub Actions](https://github.com/matlab-actions/overview) |
-| [`Jenkinsfile`](Jenkinsfile) | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs on [Jenkins](https://plugins.jenkins.io/matlab/) |
-| [`.gitlab-ci.yml`](.gitlab-ci.yml) | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs on [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) |
+| [`azure-pipelines.yml`](azure-pipelines.yml) | The [`azure-pipelines.yml`](azure-pipelines.yml) file defines the pipeline that runs with the [MATLAB Extension for Azure DevOps](https://github.com/mathworks/matlab-azure-devops-extension/blob/master/overview.md). |
+| [`.circleci/config.yml`](.circleci/config.yml) | The [`config.yml`](.circleci/config.yml) file defines the pipeline that runs with the [MATLAB Orb for CircleCI]([https://circleci.com/orbs/registry/orb/mathworks/matlab](https://github.com/mathworks/matlab-circleci-orb/blob/master/README.md)) |
+| [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | The [`ci.yml`](.github/workflows/ci.yml) file defines the pipeline that runs with [MATLAB Actions for GitHub Actions](https://github.com/matlab-actions/overview) |
+| [`Jenkinsfile`](Jenkinsfile) | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs with the [MATLAB Plugin for Jenkins](https://github.com/jenkinsci/matlab-plugin/blob/master/CONFIGDOC.md) |
+| [`.gitlab-ci.yml`](.gitlab-ci.yml) | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs with the [MATLAB Build Component for GitLab CI/CD](https://gitlab.com/mathworks/components/matlab/-/blob/main/README.md?ref_type=heads) |
 
 <br>
 
