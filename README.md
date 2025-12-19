@@ -138,7 +138,7 @@ The repository includes these files:
 | [`azure-pipelines.yml`](azure-pipelines.yml) | The [`azure-pipelines.yml`](azure-pipelines.yml) file defines the pipeline that runs using the [MATLAB extension for Azure DevOps](https://github.com/mathworks/matlab-azure-devops-extension/blob/master/overview.md). |
 | [`.circleci/config.yml`](.circleci/config.yml) | The [`config.yml`](.circleci/config.yml) file defines the pipeline that runs using the [MATLAB orb for CircleCI]([https://circleci.com/orbs/registry/orb/mathworks/matlab](https://github.com/mathworks/matlab-circleci-orb/blob/master/README.md). |
 | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | The [`ci.yml`](.github/workflows/ci.yml) file defines the pipeline that runs using the [MATLAB actions for GitHub Actions](https://github.com/matlab-actions/overview). |
-| [`Jenkinsfile`](Jenkinsfile) | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs using the [MATLAB plugin for Jenkins]](https://github.com/jenkinsci/matlab-plugin/blob/master/CONFIGDOC.md). |
+| [`Jenkinsfile`](Jenkinsfile) | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs using the [MATLAB plugin for Jenkins](https://github.com/jenkinsci/matlab-plugin/blob/master/CONFIGDOC.md). |
 | [`.gitlab-ci.yml`](.gitlab-ci.yml) | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs using the [MATLAB `build` component for GitLab CI/CD](https://gitlab.com/mathworks/components/matlab/-/blob/main/README.md). |
 
 <br>
