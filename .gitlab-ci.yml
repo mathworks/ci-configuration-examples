@@ -1,5 +1,5 @@
 # This pipeline configuration uses the `build` component to run a build using the MATLAB build tool. The component runs the
 # default tasks in a build file named `buildfile.m` located in the repository, using the latest release of MATLAB.
-# For more information about the build component, see https://gitlab.com/mathworks/components/matlab/-/blob/main/README.md.
+# For more information about the `build` component, see https://gitlab.com/mathworks/components/matlab/-/blob/main/README.md.
 include:
   - component: $CI_SERVER_FQDN/mathworks/components/matlab/build@~latest
