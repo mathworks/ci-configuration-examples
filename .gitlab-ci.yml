@@ -1,2 +1,4 @@
+# Run a build using the MATLAB Build Component for GitLab CI/CD.
+# For more information see https://gitlab.com/mathworks/components/matlab/-/blob/main/README.md.
 include:
   - component: $CI_SERVER_FQDN/mathworks/components/matlab/build@~latest
