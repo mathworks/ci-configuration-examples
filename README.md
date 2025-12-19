@@ -139,7 +139,7 @@ The repository includes these files:
 | [`.circleci/config.yml`](.circleci/config.yml) | The [`config.yml`](.circleci/config.yml) file defines the pipeline that runs with the [MATLAB Orb for CircleCI]([https://circleci.com/orbs/registry/orb/mathworks/matlab](https://github.com/mathworks/matlab-circleci-orb/blob/master/README.md)) |
 | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | The [`ci.yml`](.github/workflows/ci.yml) file defines the pipeline that runs with [MATLAB Actions for GitHub Actions](https://github.com/matlab-actions/overview) |
 | [`Jenkinsfile`](Jenkinsfile) | The [`Jenkinsfile`](Jenkinsfile) file defines the pipeline that runs with the [MATLAB Plugin for Jenkins](https://github.com/jenkinsci/matlab-plugin/blob/master/CONFIGDOC.md) |
-| [`.gitlab-ci.yml`](.gitlab-ci.yml) | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs with the [MATLAB Build Component for GitLab CI/CD](https://gitlab.com/mathworks/components/matlab/-/blob/main/README.md?ref_type=heads) |
+| [`.gitlab-ci.yml`](.gitlab-ci.yml) | The [`.gitlab-ci.yml`](.gitlab-ci.yml) file defines the pipeline that runs with the [MATLAB Build Component for GitLab CI/CD](https://gitlab.com/mathworks/components/matlab/-/blob/main/README.md) |
 
 <br>
 
