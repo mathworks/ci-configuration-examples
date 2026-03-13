@@ -4,6 +4,7 @@ on:
   workflow_run:
     workflows: ["MATLAB matrix build"]
     types: [completed]
+  workflow_dispatch: # allow manual triggering for testing
 
 permissions:
   contents: read
