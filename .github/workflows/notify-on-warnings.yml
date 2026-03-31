@@ -1,10 +1,7 @@
 name: Notify on Warnings (MATLAB matrix build)
 
 on:
-  workflow_run:
-    workflows: ["MATLAB matrix build"]
-    types: [completed]
-  workflow_dispatch: # allow manual triggering for testing
+  workflow_dispatch: # manual triggering only; workflow_run only works on the default branch
 
 permissions:
   contents: read
