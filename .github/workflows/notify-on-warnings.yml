@@ -22,21 +22,23 @@ jobs:
           script: |
             const {owner, repo} = context.repo;
             const wr = context.payload.workflow_run;
-            const sha = wr.head_sha;
+
+            // workflow_dispatch has no workflow_run payload; fall back to HEAD
+            const sha = wr?.head_sha ?? context.sha;
+            const runUrl = wr ? `https://github.com/${owner}/${repo}/actions/runs/${wr.id}` : "";
 
             // 1) All check runs for this commit
-            const result = await github.paginate(
+            const checkRuns = await github.paginate(
               github.rest.checks.listForRef,
               { owner, repo, ref: sha, per_page: 100 }
             );
-            const checkRuns = result.check_runs ?? [];
 
-            // 2) Only GitHub Actions runs whose names start with build-v2 or build-v2-with-cache
-            const prefixes = [/^build-v2(\b| |\()/, /^build-v2-with-cache(\b| |\()/];
+            // 2) Only GitHub Actions runs whose names start with build-v2
+            const prefix = /^build-v2(\b| |\()/;
             const wanted = checkRuns.filter(run => {
               const name = run.name || "";
               const fromActions = run.app?.slug === "github-actions";
-              return fromActions && prefixes.some(rx => rx.test(name));
+              return fromActions && prefix.test(name);
             });
 
             // 3) Collect warning annotations
@@ -59,12 +61,13 @@ jobs:
               }
             }
 
-            // 4) Build a clean, YAML-safe body
+            // 4) Build the email body
             const headLines = [
               `Repository: ${owner}/${repo}`,
-              `Workflow: ${wr.name} (#${wr.run_number})`,
-              `Branch: ${wr.head_branch}`,
+              `Workflow: ${wr?.name ?? "manual"} (#${wr?.run_number ?? "N/A"})`,
+              `Branch: ${wr?.head_branch ?? "N/A"}`,
               `Commit: ${sha}`,
+              ...(runUrl ? [`Run: ${runUrl}`] : []),
               "",
               `Found ${warnings.length} warning annotation(s) in build-v2 jobs.`
             ];
@@ -76,14 +79,17 @@ jobs:
               return [
                 `${i + 1}. [${w.check_run}] ${w.path}${loc}${title}`,
                 `   ${w.message}`,
-                "" // blank line between items
+                ""
               ];
             });
 
             const body = [...headLines, ...(warnings.length ? ["", `Top ${Math.min(maxItems, warnings.length)} warning(s):`, ""] : []), ...listLines].join("\n");
 
             core.setOutput("count", String(warnings.length));
-            core.setOutput("summary", body);
+
+            // Write body to file to avoid YAML injection from annotation content
+            const fs = require("fs");
+            fs.writeFileSync(process.env.GITHUB_WORKSPACE + "/warning-summary.txt", body);
 
       - name: Send mail when warnings were found
         if: steps.find.outputs.count != '0'
@@ -99,4 +105,4 @@ jobs:
           to: ${{ secrets.CI_INTERNAL_EMAIL }}
           from: ${{ secrets.MAIL_USERNAME }}
           secure: true
-          body: ${{ steps.find.outputs.summary }}
+          body: file://warning-summary.txt
