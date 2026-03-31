@@ -1,0 +1,101 @@
+name: Notify on Warnings (MATLAB matrix build)
+
+on:
+  workflow_dispatch: # manual triggering only; workflow_run only works on the default branch
+
+permissions:
+  contents: read
+  checks: read
+
+jobs:
+  notify-on-warnings:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Find warnings in build-v2* jobs
+        id: find
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            const sha = context.sha;
+            const branch = context.ref.replace(/^refs\/heads\//, "");
+
+            // 1) All check runs for this commit
+            const checkRuns = await github.paginate(
+              github.rest.checks.listForRef,
+              { owner, repo, ref: sha, per_page: 100 }
+            );
+
+            // 2) Only GitHub Actions runs whose names start with build-v2
+            const prefix = /^build-v2(\b| |\()/;
+            const wanted = checkRuns.filter(run => {
+              const name = run.name || "";
+              const fromActions = run.app?.slug === "github-actions";
+              return fromActions && prefix.test(name);
+            });
+
+            // 3) Collect warning annotations
+            const warnings = [];
+            for (const run of wanted) {
+              const anns = await github.paginate(
+                github.rest.checks.listAnnotations,
+                { owner, repo, check_run_id: run.id, per_page: 100 }
+              );
+              for (const a of anns) {
+                if (a.annotation_level === "warning") {
+                  warnings.push({
+                    check_run: run.name,
+                    path: a.path,
+                    line: a.start_line,
+                    title: a.title || "",
+                    message: a.message || ""
+                  });
+                }
+              }
+            }
+
+            // 4) Build the email body
+            const headLines = [
+              `Repository: ${owner}/${repo}`,
+              `Branch: ${branch}`,
+              `Commit: ${sha}`,
+              "",
+              `Found ${warnings.length} warning annotation(s) in build-v2 jobs.`
+            ];
+
+            const maxItems = 30;
+            const listLines = warnings.slice(0, maxItems).flatMap((w, i) => {
+              const loc = w.line ? `:${w.line}` : "";
+              const title = w.title ? ` • ${w.title}` : "";
+              return [
+                `${i + 1}. [${w.check_run}] ${w.path}${loc}${title}`,
+                `   ${w.message}`,
+                ""
+              ];
+            });
+
+            const body = [...headLines, ...(warnings.length ? ["", `Top ${Math.min(maxItems, warnings.length)} warning(s):`, ""] : []), ...listLines].join("\n");
+
+            core.setOutput("count", String(warnings.length));
+
+            const subject = `⚠️ Warnings in build-v2 jobs — ${owner}/${repo} (${branch})`;
+            core.setOutput("subject", subject);
+
+            // Write body to file to avoid YAML injection from annotation content
+            const fs = require("fs");
+            fs.writeFileSync(process.env.GITHUB_WORKSPACE + "/warning-summary.txt", body);
+
+      - name: Send mail when warnings were found
+        if: steps.find.outputs.count != '0'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: ${{ steps.find.outputs.subject }}
+          to: ${{ secrets.CI_INTERNAL_EMAIL }}
+          from: ${{ secrets.MAIL_USERNAME }}
+          secure: true
+          body: file://warning-summary.txt
