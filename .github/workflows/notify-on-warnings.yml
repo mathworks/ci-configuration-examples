@@ -18,11 +18,8 @@ jobs:
         with:
           script: |
             const {owner, repo} = context.repo;
-            const wr = context.payload.workflow_run;
-
-            // workflow_dispatch has no workflow_run payload; fall back to HEAD
-            const sha = wr?.head_sha ?? context.sha;
-            const runUrl = wr ? `https://github.com/${owner}/${repo}/actions/runs/${wr.id}` : "";
+            const sha = context.sha;
+            const branch = context.ref.replace(/^refs\/heads\//, "");
 
             // 1) All check runs for this commit
             const checkRuns = await github.paginate(
@@ -61,10 +58,8 @@ jobs:
             // 4) Build the email body
             const headLines = [
               `Repository: ${owner}/${repo}`,
-              `Workflow: ${wr?.name ?? "manual"} (#${wr?.run_number ?? "N/A"})`,
-              `Branch: ${wr?.head_branch ?? "N/A"}`,
+              `Branch: ${branch}`,
               `Commit: ${sha}`,
-              ...(runUrl ? [`Run: ${runUrl}`] : []),
               "",
               `Found ${warnings.length} warning annotation(s) in build-v2 jobs.`
             ];
@@ -84,7 +79,7 @@ jobs:
 
             core.setOutput("count", String(warnings.length));
 
-            const subject = `⚠️ Warnings in build-v2 jobs — ${owner}/${repo} (run #${wr?.run_number ?? "N/A"} on ${wr?.head_branch ?? "N/A"})`;
+            const subject = `⚠️ Warnings in build-v2 jobs — ${owner}/${repo} (${branch})`;
             core.setOutput("subject", subject);
 
             // Write body to file to avoid YAML injection from annotation content
