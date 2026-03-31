@@ -87,6 +87,9 @@ jobs:
 
             core.setOutput("count", String(warnings.length));
 
+            const subject = `⚠️ Warnings in build-v2 jobs — ${owner}/${repo} (run #${wr?.run_number ?? "N/A"} on ${wr?.head_branch ?? "N/A"})`;
+            core.setOutput("subject", subject);
+
             // Write body to file to avoid YAML injection from annotation content
             const fs = require("fs");
             fs.writeFileSync(process.env.GITHUB_WORKSPACE + "/warning-summary.txt", body);
@@ -99,9 +102,7 @@ jobs:
           server_port: 465
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: >
-            :warning: Warnings in build-v2 jobs — ${{ github.repository }}
-            (run #${{ github.event.workflow_run.run_number }} on ${{ github.event.workflow_run.head_branch }})
+          subject: ${{ steps.find.outputs.subject }}
           to: ${{ secrets.CI_INTERNAL_EMAIL }}
           from: ${{ secrets.MAIL_USERNAME }}
           secure: true
