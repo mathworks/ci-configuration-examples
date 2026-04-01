@@ -2,6 +2,7 @@ name: Notify on Warnings (MATLAB matrix build)
 
 on:
   workflow_dispatch: # manual triggering only; workflow_run only works on the default branch
+  push: # temporary: register workflow with GitHub, remove after first run
 
 permissions:
   contents: read
