@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Find warnings in build-v2* jobs
+      - name: Find warnings in build-v3* jobs
         id: find
         uses: actions/github-script@v8
         with:
@@ -27,8 +27,8 @@ jobs:
               { owner, repo, ref: sha, per_page: 100 }
             );
 
-            // 2) Only GitHub Actions runs whose names start with build-v2
-            const prefix = /^build-v2(\b| |\()/;
+            // 2) Only GitHub Actions runs whose names start with build-v3
+            const prefix = /^build-v3(\b| |\()/;
             const wanted = checkRuns.filter(run => {
               const name = run.name || "";
               const fromActions = run.app?.slug === "github-actions";
@@ -61,7 +61,7 @@ jobs:
               `Branch: ${branch}`,
               `Commit: ${sha}`,
               "",
-              `Found ${warnings.length} warning annotation(s) in build-v2 jobs.`
+              `Found ${warnings.length} warning annotation(s) in build-v3 jobs.`
             ];
 
             const maxItems = 30;
@@ -79,7 +79,7 @@ jobs:
 
             core.setOutput("count", String(warnings.length));
 
-            const subject = `⚠️ Warnings in build-v2 jobs — ${owner}/${repo} (${branch})`;
+            const subject = `⚠️ Warnings in build-v3 jobs — ${owner}/${repo} (${branch})`;
             core.setOutput("subject", subject);
 
             // Write body to file to avoid YAML injection from annotation content
