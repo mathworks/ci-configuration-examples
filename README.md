@@ -157,6 +157,7 @@ To license products that are not automatically licensed, you can request a [MATL
 
 ## See Also
 - [Advanced Continuous Integration (CI) configuration examples for MATLAB](https://github.com/mathworks/advanced-ci-configuration-examples)
+- [Integrate MATLAB and Simulink into CI/CD Pipelines](https://github.com/mathworks/devops-integration-guide)
 - [Continuous Integration with MATLAB and Simulink](https://www.mathworks.com/solutions/continuous-integration.html)
 
 <br>
