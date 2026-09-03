@@ -30,13 +30,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup MATLAB
-        uses: matlab-actions/setup-matlab@v2
+        uses: matlab-actions/setup-matlab@v3
         with:
           release: ${{ matrix.release }}
           products: Optimization_Toolbox Curve_Fitting_Toolbox
         
       - name: Run tests and generate artifacts
-        uses: matlab-actions/run-tests@v2
+        uses: matlab-actions/run-tests@v3
         with:
           source-folder: code
 
