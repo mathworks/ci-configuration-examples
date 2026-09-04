@@ -61,7 +61,7 @@ workflows:
          matrix:
            parameters:
               os: [linux]
-              release: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, R2024b, R2025a, latest, latest-including-prerelease]
+              release: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, R2024b, R2025a, R2025b, R2026a, latest, latest-including-prerelease]
       - build:
          matrix:
            parameters:
