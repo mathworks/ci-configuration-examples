@@ -12,44 +12,6 @@ env:
   MW_BATCH_LICENSING_ONLINE: true  # testing online validation, can remove when this becomes the default
 
 jobs:
-  build-v1:
-    strategy:
-      matrix:
-        # Run this workflow on different os
-        os: [ubuntu-latest]
-      fail-fast: false
-    # The type of runner that the job will run on
-    runs-on: ${{ matrix.os }}
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v6
-
-      # Sets up MATLAB on the GitHub Actions runner
-      - name: Setup MATLAB
-        uses: matlab-actions/setup-matlab@v1
-
-      # Runs a set of commands using the runners shell
-      - name: Run tests and generate artifacts
-        uses: matlab-actions/run-tests@v1
-        with:
-          source-folder: code
-
-      - name: Send mail
-        if: ${{ failure() }}
-        uses: dawidd6/action-send-mail@v17
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
-          to: ${{ secrets.CI_INTERNAL_EMAIL }}
-          from: ${{ secrets.MAIL_USERNAME }}
-          secure: true
-          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
-
   build-v2:
     strategy:
       matrix:
