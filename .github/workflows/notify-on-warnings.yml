@@ -6,6 +6,7 @@ on:
 permissions:
   contents: read
   checks: read
+  actions: read
 
 jobs:
   notify-on-warnings:
@@ -18,22 +19,25 @@ jobs:
         with:
           script: |
             const {owner, repo} = context.repo;
-            const sha = context.sha;
             const branch = context.ref.replace(/^refs\/heads\//, "");
 
-            // 1) All check runs for this commit
-            const checkRuns = await github.paginate(
-              github.rest.checks.listForRef,
-              { owner, repo, ref: sha, per_page: 100 }
-            );
-
-            // 2) Only GitHub Actions runs whose names start with build-v3
-            const prefix = /^build-v3(\b| |\()/;
-            const wanted = checkRuns.filter(run => {
-              const name = run.name || "";
-              const fromActions = run.app?.slug === "github-actions";
-              return fromActions && prefix.test(name);
+            // 1) Most recent completed ci.yml run on this branch. Scheduled runs reuse
+            //    the same commit, so querying check runs by SHA would include old runs.
+            const { data: { workflow_runs: [latestRun] } } = await github.rest.actions.listWorkflowRuns({
+              owner, repo, workflow_id: "ci.yml", branch, status: "completed", per_page: 1
             });
+            if (!latestRun) {
+              core.setFailed(`No completed ci.yml runs found on branch ${branch}`);
+              return;
+            }
+
+            // 2) Only jobs in that run whose names start with build-v3 (job id == check run id)
+            const jobs = await github.paginate(
+              github.rest.actions.listJobsForWorkflowRun,
+              { owner, repo, run_id: latestRun.id, filter: "latest", per_page: 100 }
+            );
+            const prefix = /^build-v3(\b| |\()/;
+            const wanted = jobs.filter(job => prefix.test(job.name || ""));
 
             // 3) Collect warning annotations
             const warnings = [];
@@ -59,7 +63,8 @@ jobs:
             const headLines = [
               `Repository: ${owner}/${repo}`,
               `Branch: ${branch}`,
-              `Commit: ${sha}`,
+              `Commit: ${latestRun.head_sha}`,
+              `Run: ${latestRun.html_url}`,
               "",
               `Found ${warnings.length} warning annotation(s) in build-v3 jobs.`
             ];
